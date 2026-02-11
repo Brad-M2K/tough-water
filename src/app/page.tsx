@@ -1,4 +1,8 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 import {
   NavigationMenu,
@@ -52,9 +56,43 @@ const complianceLinks = [
 ];
 
 export default function Home() {
+  const waveRef = useRef<HTMLDivElement>(null);
+  const [showNavBackground, setShowNavBackground] = useState(false);
+
+  useEffect(() => {
+    const updateNavBackground = () => {
+      const waveBottom = waveRef.current?.getBoundingClientRect().bottom ?? 1;
+      setShowNavBackground(waveBottom <= 0);
+    };
+
+    updateNavBackground();
+    window.addEventListener("scroll", updateNavBackground, { passive: true });
+    window.addEventListener("resize", updateNavBackground);
+
+    return () => {
+      window.removeEventListener("scroll", updateNavBackground);
+      window.removeEventListener("resize", updateNavBackground);
+    };
+  }, []);
+
   return (
     <div className="from-background via-background to-muted/30 min-h-screen bg-gradient-to-b">
-      <header className="bg-background/95 sticky top-0 z-30 border-b backdrop-blur">
+      <div ref={waveRef} aria-hidden="true" className="w-screen overflow-hidden leading-none">
+        <Image
+          src="/tws-wave-top.svg"
+          alt=""
+          width={4245}
+          height={75}
+          className="block h-auto w-full"
+          priority
+        />
+      </div>
+
+      <header
+        className={`sticky top-0 z-30 transition-colors ${
+          showNavBackground ? "bg-white" : "bg-transparent"
+        }`}
+      >
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
           <Link href="/" className="text-lg font-semibold tracking-tight">
             Tough Water
