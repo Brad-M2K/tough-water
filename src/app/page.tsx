@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { MenuIcon, XIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import {
@@ -58,6 +59,7 @@ const complianceLinks = [
 export default function Home() {
   const waveRef = useRef<HTMLDivElement>(null);
   const [showNavBackground, setShowNavBackground] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const updateNavBackground = () => {
@@ -75,8 +77,28 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const closeMobileMenuOnDesktop = () => {
+      if (window.innerWidth >= 1024) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", closeMobileMenuOnDesktop);
+    return () => {
+      window.removeEventListener("resize", closeMobileMenuOnDesktop);
+    };
+  }, []);
+
   return (
-    <div className="from-background via-background to-muted/30 min-h-screen bg-gradient-to-b">
+    <div className="from-background via-background to-muted/30 min-h-screen bg-linear-to-b">
       <div ref={waveRef} aria-hidden="true" className="w-screen overflow-hidden leading-none">
         <Image
           src="/tws-wave-top.svg"
@@ -94,11 +116,20 @@ export default function Home() {
         }`}
       >
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/" className="text-lg font-semibold tracking-tight">
-            Tough Water
+          <Link href="/" className="shrink-0">
+            <Image
+              src="/tws-logo-wordmark.png"
+              alt="Tough Water"
+              width={300}
+              height={64}
+              className={`w-auto transition-all duration-300 ${
+                showNavBackground ? "h-8 md:h-9" : "h-16 md:h-20"
+              }`}
+              priority
+            />
           </Link>
 
-          <NavigationMenu className="hidden md:flex">
+          <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Plumbing Services</NavigationMenuTrigger>
@@ -150,7 +181,7 @@ export default function Home() {
             </NavigationMenuList>
           </NavigationMenu>
 
-          <div className="flex items-center gap-2">
+          <div className="hidden items-center gap-2 lg:flex">
             <Link
               href="tel:+441234567890"
               className="rounded-md border px-3 py-2 text-sm font-medium"
@@ -164,22 +195,95 @@ export default function Home() {
               Request Quote
             </Link>
           </div>
-        </div>
-        <div className="mx-auto flex w-full max-w-6xl gap-2 px-6 pb-4 md:hidden">
-          <Link href="#services" className="rounded-md border px-3 py-1.5 text-sm font-medium">
-            Services
-          </Link>
-          <Link href="#hygiene" className="rounded-md border px-3 py-1.5 text-sm font-medium">
-            Hygiene
-          </Link>
-          <Link href="#about" className="rounded-md border px-3 py-1.5 text-sm font-medium">
-            About
-          </Link>
-          <Link href="#contact" className="rounded-md border px-3 py-1.5 text-sm font-medium">
-            Contact
-          </Link>
+
+          <button
+            type="button"
+            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMobileMenuOpen}
+            onClick={() => setIsMobileMenuOpen((open) => !open)}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md border lg:hidden"
+          >
+            {isMobileMenuOpen ? <XIcon className="size-5" /> : <MenuIcon className="size-5" />}
+          </button>
         </div>
       </header>
+
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-20 overflow-y-auto bg-white px-6 pt-28 pb-8 lg:hidden">
+          <nav className="mx-auto flex w-full max-w-6xl flex-col gap-8">
+            <section>
+              <h2 className="text-muted-foreground text-xs font-semibold tracking-[0.14em] uppercase">
+                Plumbing Services
+              </h2>
+              <ul className="mt-3 space-y-3">
+                {serviceLinks.map((item) => (
+                  <li key={item.title}>
+                    <Link
+                      href={item.href}
+                      className="block text-base font-medium"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-muted-foreground text-xs font-semibold tracking-[0.14em] uppercase">
+                Water Hygiene
+              </h2>
+              <ul className="mt-3 space-y-3">
+                {complianceLinks.map((item) => (
+                  <li key={item.title}>
+                    <Link
+                      href={item.href}
+                      className="block text-base font-medium"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section>
+              <ul className="space-y-3">
+                {primaryLinks.map((item) => (
+                  <li key={item.label}>
+                    <Link
+                      href={item.href}
+                      className="block text-base font-medium"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <div className="mt-2 flex flex-col gap-3">
+              <Link
+                href="tel:+441234567890"
+                className="rounded-md border px-4 py-3 text-center text-sm font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                24/7 Callout
+              </Link>
+              <Link
+                href="#contact"
+                className="bg-primary text-primary-foreground rounded-md px-4 py-3 text-center text-sm font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Request Quote
+              </Link>
+            </div>
+          </nav>
+        </div>
+      )}
 
       <main className="mx-auto flex w-full max-w-6xl flex-col px-6 py-10">
         <section className="bg-card grid gap-8 rounded-2xl border p-8 shadow-sm md:grid-cols-2 md:items-center md:p-12">
