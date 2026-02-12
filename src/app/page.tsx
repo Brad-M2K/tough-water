@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const serviceLinks = [
   {
     href: "#services",
@@ -37,29 +39,77 @@ const complianceLinks = [
 export default function Home() {
   return (
     <div className="from-background via-background to-muted/30 min-h-screen bg-linear-to-b">
-      <main className="mx-auto flex w-full max-w-6xl flex-col px-6 py-10">
-        <section className="grid gap-10 py-8 md:grid-cols-[1.4fr_1fr] md:items-start md:py-12">
-          <div className="space-y-6">
-            <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-[#36467F] md:text-6xl">
-              Clean Water. Safe Systems. Full Compliance.
-            </h1>
-            <p className="text-2xl font-medium text-[#36467F]">
-              Professional Water Hygiene Services
-            </p>
-            <p className="text-muted-foreground max-w-3xl text-2xl leading-relaxed">
-              Professional legionella risk assessments, monitoring, and remedial works for
-              commercial and residential properties across the UK.
-            </p>
+      <main className="mx-auto flex w-full max-w-6xl flex-col px-6 pb-10">
+        <section className="relative right-1/2 left-1/2 -mx-[50vw] w-screen">
+          <div
+            className="md:hidden"
+            style={{
+              backgroundImage: "url('/border-splash-hero.png')",
+              backgroundSize: "100% auto",
+              backgroundRepeat: "repeat-y",
+            }}
+          >
+            <div className="mx-auto grid w-full max-w-6xl gap-8 px-6 py-8">
+              <div className="space-y-6">
+                <h1 className="max-w-3xl text-2xl font-bold tracking-tight text-[#36467F]">
+                  Clean Water. Safe Systems. Full Compliance.
+                </h1>
+                <p className="text-xl font-medium text-[#36467F]">
+                  Professional Water Hygiene Services
+                </p>
+                <p className="text-muted-foreground max-w-3xl text-xl leading-relaxed">
+                  Professional legionella risk assessments, monitoring, and remedial works for
+                  commercial and residential properties across the UK.
+                </p>
+              </div>
+              <div className="rounded-2xl bg-gray-100/60 p-8">
+                <h2 className="text-2xl font-bold tracking-tight text-[#36467F]">Our Services</h2>
+                <p className="mt-4 text-lg font-medium text-[#36467F]">
+                  End-to-end support for safer, compliant water systems.
+                </p>
+                <p className="text-muted-foreground mt-5 text-lg leading-relaxed">
+                  Trusted by facilities teams and property managers for practical compliance
+                  delivery and long-term system reliability.
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="bg-card rounded-2xl p-8 md:p-10">
-            <h2 className="text-4xl font-semibold tracking-tight text-[#36467F]">Our Services</h2>
-            <p className="mt-4 text-2xl font-medium text-[#36467F]">
-              End-to-end support for safer, compliant water systems.
-            </p>
-            <p className="text-muted-foreground mt-5 text-xl leading-relaxed">
-              Trusted by facilities teams and property managers for practical compliance delivery
-              and long-term system reliability.
-            </p>
+
+          <div className="relative hidden overflow-hidden md:block">
+            <Image
+              src="/border-splash-hero.png"
+              alt=""
+              width={4249}
+              height={2419}
+              className="block h-auto w-full"
+              priority
+            />
+            <div className="absolute inset-0">
+              <div className="mx-auto grid h-full w-full max-w-6xl gap-10 px-6 py-12 md:grid-cols-[1.4fr_1fr] md:items-start">
+                <div className="space-y-6">
+                  <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-[#36467F]">
+                    Clean Water. Safe Systems. Full Compliance.
+                  </h1>
+                  <p className="text-xl font-medium text-[#36467F]">
+                    Professional Water Hygiene Services
+                  </p>
+                  <p className="text-muted-foreground max-w-3xl text-xl leading-relaxed">
+                    Professional legionella risk assessments, monitoring, and remedial works for
+                    commercial and residential properties across the UK.
+                  </p>
+                </div>
+                <div className="rounded-2xl bg-gray-100/60 p-10">
+                  <h2 className="text-2xl font-bold tracking-tight text-[#36467F]">Our Services</h2>
+                  <p className="mt-4 text-lg font-medium text-[#36467F]">
+                    End-to-end support for safer, compliant water systems.
+                  </p>
+                  <p className="text-muted-foreground mt-5 text-lg leading-relaxed">
+                    Trusted by facilities teams and property managers for practical compliance
+                    delivery and long-term system reliability.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
