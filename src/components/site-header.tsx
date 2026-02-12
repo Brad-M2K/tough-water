@@ -61,7 +61,7 @@ export function SiteHeader() {
   const [showNavBackground, setShowNavBackground] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownTriggerClass =
-    "bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent data-[state=open]:hover:bg-transparent";
+    "bg-transparent font-bold text-[#36467F] hover:bg-transparent hover:text-[#36467F] focus:bg-transparent focus:text-[#36467F] data-[state=open]:bg-transparent data-[state=open]:hover:bg-transparent data-[state=open]:text-[#36467F]";
 
   useEffect(() => {
     const updateNavBackground = () => {
@@ -112,13 +112,15 @@ export function SiteHeader() {
         />
       </div>
 
-      <header
-        className={`sticky top-0 z-30 transition-colors ${
-          showNavBackground ? "bg-white/60 backdrop-blur-2xl" : "bg-transparent"
-        }`}
-      >
+      <header className="sticky top-0 z-30">
+        {showNavBackground && (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-white/60 backdrop-blur-2xl backdrop-saturate-150"
+          />
+        )}
         <div
-          className={`mx-auto flex w-full max-w-6xl items-center justify-between px-6 transition-all duration-300 ${
+          className={`relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 transition-all duration-300 ${
             showNavBackground ? "py-2" : "py-4"
           }`}
         >
@@ -147,7 +149,7 @@ export function SiteHeader() {
                       <li key={item.title}>
                         <NavigationMenuLink asChild>
                           <Link href={item.href} className="rounded-md p-3">
-                            <div className="text-sm font-medium">{item.title}</div>
+                            <div className="text-sm font-medium text-[#36467F]">{item.title}</div>
                             <p className="text-muted-foreground mt-1 text-sm leading-snug">
                               {item.description}
                             </p>
@@ -169,7 +171,7 @@ export function SiteHeader() {
                       <li key={item.title}>
                         <NavigationMenuLink asChild>
                           <Link href={item.href} className="rounded-md p-3">
-                            <div className="text-sm font-medium">{item.title}</div>
+                            <div className="text-sm font-medium text-[#36467F]">{item.title}</div>
                             <p className="text-muted-foreground mt-1 text-sm leading-snug">
                               {item.description}
                             </p>
@@ -184,7 +186,9 @@ export function SiteHeader() {
               {primaryLinks.map((item) => (
                 <NavigationMenuItem key={item.label}>
                   <NavigationMenuLink asChild>
-                    <Link href={item.href}>{item.label}</Link>
+                    <Link href={item.href} className="font-semibold text-[#36467F]">
+                      {item.label}
+                    </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
