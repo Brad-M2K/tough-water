@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
 
 import {
@@ -184,18 +185,27 @@ export function SiteHeader() {
             </NavigationMenuList>
           </NavigationMenu>
 
-          <div className="hidden items-center gap-2 lg:flex">
+          <div className="hidden items-center gap-4 lg:flex">
+            <div className="h-10 w-px bg-[#36467F]/30" />
             <Link
-              href="tel:+441234567890"
-              className="rounded-md border px-3 py-2 text-sm font-medium"
+              href="#"
+              aria-label="Facebook"
+              className="inline-flex h-7 w-7 items-center justify-center rounded-sm bg-[#36467F] text-white transition-opacity hover:opacity-90"
             >
-              24/7 Callout
+              <FaFacebookF className="size-4" />
+            </Link>
+            <Link
+              href="#"
+              aria-label="LinkedIn"
+              className="inline-flex h-7 w-7 items-center justify-center rounded-sm bg-[#36467F] text-white transition-opacity hover:opacity-90"
+            >
+              <FaLinkedinIn className="size-4" />
             </Link>
             <Link
               href="/#contact"
-              className="rounded-md bg-[#36467F] px-3 py-2 text-sm font-medium text-white"
+              className="rounded-md bg-[#36467F] px-4 py-1 text-lg font-semibold text-white transition-opacity hover:opacity-90"
             >
-              Request Quote
+              Get in Touch
             </Link>
           </div>
 
@@ -285,20 +295,31 @@ export function SiteHeader() {
               </ul>
             </section>
 
-            <div className="mt-2 flex flex-col gap-3">
-              <Link
-                href="tel:+441234567890"
-                className="rounded-md border px-4 py-3 text-center text-sm font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                24/7 Callout
-              </Link>
+            <div className="mt-2 border-t border-[#36467F]/20 pt-6">
+              <div className="flex items-center justify-center gap-4">
+                <Link
+                  href="#"
+                  aria-label="Facebook"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-[#36467F] text-white transition-opacity hover:opacity-90"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <FaFacebookF className="size-5" />
+                </Link>
+                <Link
+                  href="#"
+                  aria-label="LinkedIn"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-[#36467F] text-white transition-opacity hover:opacity-90"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <FaLinkedinIn className="size-5" />
+                </Link>
+              </div>
               <Link
                 href="/#contact"
-                className="rounded-md bg-[#36467F] px-4 py-3 text-center text-sm font-medium text-white"
+                className="mt-4 block rounded-md bg-[#36467F] px-4 py-2.5 text-center text-sm font-semibold text-white transition-opacity hover:opacity-90"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Request Quote
+                Get in Touch
               </Link>
             </div>
           </nav>

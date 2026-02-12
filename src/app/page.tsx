@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const serviceLinks = [
   {
     href: "#services",
@@ -40,38 +38,28 @@ export default function Home() {
   return (
     <div className="from-background via-background to-muted/30 min-h-screen bg-linear-to-b">
       <main className="mx-auto flex w-full max-w-6xl flex-col px-6 py-10">
-        <section className="bg-card grid gap-8 rounded-2xl border p-8 shadow-sm md:grid-cols-2 md:items-center md:p-12">
-          <div className="space-y-5">
-            <p className="text-muted-foreground text-sm font-medium tracking-wider uppercase">
-              Commercial Plumbing & Water Hygiene
-            </p>
-            <h1 className="text-4xl font-semibold tracking-tight text-[#36467F] md:text-5xl">
-              Safe water systems and dependable plumbing for high-stakes sites
+        <section className="grid gap-10 py-8 md:grid-cols-[1.4fr_1fr] md:items-start md:py-12">
+          <div className="space-y-6">
+            <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-[#36467F] md:text-6xl">
+              Clean Water. Safe Systems. Full Compliance.
             </h1>
-            <p className="text-muted-foreground max-w-xl">
-              Tough Water supports facilities teams, property managers, and businesses with
-              responsive plumbing support and water hygiene compliance services.
+            <p className="text-2xl font-medium text-[#36467F]">
+              Professional Water Hygiene Services
             </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="#services"
-                className="rounded-md bg-[#36467F] px-4 py-2 text-sm font-medium text-white"
-              >
-                Explore Services
-              </Link>
-              <Link href="#hygiene" className="rounded-md border px-4 py-2 text-sm font-medium">
-                View Compliance Scope
-              </Link>
-            </div>
+            <p className="text-muted-foreground max-w-3xl text-2xl leading-relaxed">
+              Professional legionella risk assessments, monitoring, and remedial works for
+              commercial and residential properties across the UK.
+            </p>
           </div>
-          <div className="bg-muted/60 rounded-xl border p-6">
-            <p className="text-sm font-medium">Typical client environments</p>
-            <ul className="text-muted-foreground mt-3 space-y-2 text-sm">
-              <li>Healthcare and care settings</li>
-              <li>Education campuses</li>
-              <li>Hospitality and leisure properties</li>
-              <li>Industrial and commercial estates</li>
-            </ul>
+          <div className="bg-card rounded-2xl p-8 md:p-10">
+            <h2 className="text-4xl font-semibold tracking-tight text-[#36467F]">Our Services</h2>
+            <p className="mt-4 text-2xl font-medium text-[#36467F]">
+              End-to-end support for safer, compliant water systems.
+            </p>
+            <p className="text-muted-foreground mt-5 text-xl leading-relaxed">
+              Trusted by facilities teams and property managers for practical compliance delivery
+              and long-term system reliability.
+            </p>
           </div>
         </section>
 
