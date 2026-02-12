@@ -99,7 +99,7 @@ export function SiteHeader() {
 
   return (
     <>
-      <div ref={waveRef} aria-hidden="true" className="w-screen overflow-hidden leading-none">
+      <div ref={waveRef} aria-hidden="true" className="w-full overflow-hidden leading-none">
         <Image
           src="/tws-wave-top.svg"
           alt=""
@@ -112,7 +112,7 @@ export function SiteHeader() {
 
       <header
         className={`sticky top-0 z-30 transition-colors ${
-          showNavBackground ? "bg-white" : "bg-transparent"
+          showNavBackground ? "bg-white/70 backdrop-blur-2xl" : "bg-transparent"
         }`}
       >
         <div

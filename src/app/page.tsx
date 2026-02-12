@@ -39,19 +39,54 @@ const complianceLinks = [
 export default function Home() {
   return (
     <div className="from-background via-background to-muted/30 min-h-screen bg-linear-to-b">
-      <main className="mx-auto flex w-full max-w-6xl flex-col px-6 pb-10">
-        <section className="relative right-1/2 left-1/2 -mx-[50vw] w-screen">
-          <div
-            className="md:hidden"
-            style={{
-              backgroundImage: "url('/border-splash-hero.png')",
-              backgroundSize: "100% auto",
-              backgroundRepeat: "repeat-y",
-            }}
-          >
-            <div className="mx-auto grid w-full max-w-6xl gap-8 px-6 py-8">
+      <section className="relative mb-32 w-full">
+        <div
+          className="md:hidden"
+          style={{
+            backgroundImage: "url('/border-splash-hero.png')",
+            backgroundSize: "100% auto",
+            backgroundRepeat: "repeat-y",
+          }}
+        >
+          <div className="mx-auto grid w-full max-w-6xl gap-6 px-6 py-6">
+            <div className="space-y-4">
+              <h1 className="max-w-3xl text-xl font-bold tracking-tight text-[#36467F]">
+                Clean Water. Safe Systems. Full Compliance.
+              </h1>
+              <p className="text-base font-semibold text-[#36467F]">
+                Professional Water Hygiene Services
+              </p>
+              <p className="text-muted-foreground max-w-3xl text-base leading-7">
+                Professional legionella risk assessments, monitoring, and remedial works for
+                commercial and residential properties across the UK.
+              </p>
+            </div>
+            <div className="rounded-2xl bg-gray-100/60 p-6">
+              <h2 className="text-xl font-bold tracking-tight text-[#36467F]">Our Services</h2>
+              <p className="mt-3 text-base font-semibold text-[#36467F]">
+                End-to-end support for safer, compliant water systems.
+              </p>
+              <p className="text-muted-foreground mt-4 text-base leading-7">
+                Trusted by facilities teams and property managers for practical compliance delivery
+                and long-term system reliability.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative hidden overflow-visible md:block">
+          <Image
+            src="/border-splash-hero.png"
+            alt=""
+            width={4249}
+            height={2419}
+            className="block h-auto w-full"
+            priority
+          />
+          <div className="absolute inset-0">
+            <div className="mx-auto grid h-full w-full max-w-6xl gap-10 px-6 py-12 md:grid-cols-[1.4fr_1fr] md:items-start">
               <div className="space-y-6">
-                <h1 className="max-w-3xl text-2xl font-bold tracking-tight text-[#36467F]">
+                <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-[#36467F]">
                   Clean Water. Safe Systems. Full Compliance.
                 </h1>
                 <p className="text-xl font-medium text-[#36467F]">
@@ -62,7 +97,7 @@ export default function Home() {
                   commercial and residential properties across the UK.
                 </p>
               </div>
-              <div className="rounded-2xl bg-gray-100/60 p-8">
+              <div className="rounded-2xl bg-gray-100/60 p-10">
                 <h2 className="text-2xl font-bold tracking-tight text-[#36467F]">Our Services</h2>
                 <p className="mt-4 text-lg font-medium text-[#36467F]">
                   End-to-end support for safer, compliant water systems.
@@ -74,45 +109,19 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          <div className="relative hidden overflow-hidden md:block">
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-1/2">
             <Image
-              src="/border-splash-hero.png"
+              src="/water-splash-seperation.png"
               alt=""
               width={4249}
-              height={2419}
-              className="block h-auto w-full"
-              priority
+              height={700}
+              className="mx-auto w-full max-w-none"
             />
-            <div className="absolute inset-0">
-              <div className="mx-auto grid h-full w-full max-w-6xl gap-10 px-6 py-12 md:grid-cols-[1.4fr_1fr] md:items-start">
-                <div className="space-y-6">
-                  <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-[#36467F]">
-                    Clean Water. Safe Systems. Full Compliance.
-                  </h1>
-                  <p className="text-xl font-medium text-[#36467F]">
-                    Professional Water Hygiene Services
-                  </p>
-                  <p className="text-muted-foreground max-w-3xl text-xl leading-relaxed">
-                    Professional legionella risk assessments, monitoring, and remedial works for
-                    commercial and residential properties across the UK.
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-gray-100/60 p-10">
-                  <h2 className="text-2xl font-bold tracking-tight text-[#36467F]">Our Services</h2>
-                  <p className="mt-4 text-lg font-medium text-[#36467F]">
-                    End-to-end support for safer, compliant water systems.
-                  </p>
-                  <p className="text-muted-foreground mt-5 text-lg leading-relaxed">
-                    Trusted by facilities teams and property managers for practical compliance
-                    delivery and long-term system reliability.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
+      <main className="mx-auto flex w-full max-w-6xl flex-col px-6 pb-10">
         <section id="services" className="mt-14">
           <h2 className="text-2xl font-semibold tracking-tight text-[#36467F]">
             Plumbing Services
