@@ -39,7 +39,7 @@ const complianceLinks = [
 export default function Home() {
   return (
     <div className="from-background via-background to-muted/30 min-h-screen bg-linear-to-b">
-      <section className="relative mb-32 w-full">
+      <section className="relative mb-[clamp(7rem,10vw,12rem)] w-full">
         <div
           className="md:hidden"
           style={{
@@ -74,19 +74,19 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative hidden overflow-visible md:block">
+        <div className="relative hidden h-[clamp(34rem,52vw,52rem)] overflow-visible md:block">
           <Image
             src="/border-splash-hero.png"
             alt=""
-            width={4249}
-            height={2419}
-            className="block h-auto w-full"
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
             priority
           />
           <div className="absolute inset-0">
             <div className="mx-auto grid h-full w-full max-w-6xl gap-10 px-6 py-12 md:grid-cols-[1.4fr_1fr] md:items-start">
               <div className="space-y-6">
-                <h1 className="max-w-3xl text-4xl font-bold tracking-tight text-[#36467F]">
+                <h1 className="max-w-3xl text-[clamp(2rem,3.2vw,3.75rem)] font-bold tracking-tight text-[#36467F]">
                   Clean Water. Safe Systems. Full Compliance.
                 </h1>
                 <p className="text-xl font-medium text-[#36467F]">
@@ -109,13 +109,13 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-1/2">
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-[35%]">
             <Image
               src="/water-splash-seperation.png"
               alt=""
               width={4249}
               height={700}
-              className="mx-auto w-full max-w-none"
+              className="mx-auto w-full max-w-[1600px]"
             />
           </div>
         </div>

@@ -60,6 +60,8 @@ export function SiteHeader() {
   const waveRef = useRef<HTMLDivElement>(null);
   const [showNavBackground, setShowNavBackground] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const dropdownTriggerClass =
+    "bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent data-[state=open]:hover:bg-transparent";
 
   useEffect(() => {
     const updateNavBackground = () => {
@@ -105,14 +107,14 @@ export function SiteHeader() {
           alt=""
           width={4245}
           height={75}
-          className="block h-auto w-full"
+          className="mx-auto block h-auto w-full max-w-480"
           priority
         />
       </div>
 
       <header
         className={`sticky top-0 z-30 transition-colors ${
-          showNavBackground ? "bg-white/70 backdrop-blur-2xl" : "bg-transparent"
+          showNavBackground ? "bg-white/60 backdrop-blur-2xl" : "bg-transparent"
         }`}
       >
         <div
@@ -136,7 +138,9 @@ export function SiteHeader() {
           <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Plumbing Services</NavigationMenuTrigger>
+                <NavigationMenuTrigger className={dropdownTriggerClass}>
+                  Plumbing Services
+                </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-105 gap-2 md:grid-cols-1">
                     {serviceLinks.map((item) => (
@@ -156,7 +160,9 @@ export function SiteHeader() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Water Hygiene</NavigationMenuTrigger>
+                <NavigationMenuTrigger className={dropdownTriggerClass}>
+                  Water Hygiene
+                </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-105 gap-2 md:grid-cols-1">
                     {complianceLinks.map((item) => (
