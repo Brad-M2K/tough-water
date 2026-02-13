@@ -99,6 +99,19 @@ export function SiteHeader() {
     };
   }, []);
 
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, []);
+
   return (
     <>
       <div ref={waveRef} aria-hidden="true" className="w-full overflow-hidden leading-none">
@@ -112,7 +125,7 @@ export function SiteHeader() {
         />
       </div>
 
-      <header className="sticky top-0 z-30">
+      <header className="sticky top-0 z-50">
         {showNavBackground && (
           <div
             aria-hidden="true"
@@ -223,8 +236,9 @@ export function SiteHeader() {
             type="button"
             aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-nav-drawer"
             onClick={() => setIsMobileMenuOpen((open) => !open)}
-            className="relative inline-flex h-10 w-10 items-center justify-center lg:hidden"
+            className="relative z-50 inline-flex h-10 w-10 items-center justify-center lg:hidden"
           >
             <span
               aria-hidden="true"
@@ -248,9 +262,28 @@ export function SiteHeader() {
         </div>
       </header>
 
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-20 overflow-y-auto bg-white px-6 pt-28 pb-8 lg:hidden">
-          <nav className="mx-auto flex w-full max-w-6xl flex-col gap-8">
+      <div
+        className={`fixed inset-0 z-40 lg:hidden ${
+          isMobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
+        }`}
+      >
+        <button
+          type="button"
+          aria-label="Close mobile menu"
+          onClick={() => setIsMobileMenuOpen(false)}
+          className={`absolute inset-0 bg-black/25 transition-opacity duration-300 ${
+            isMobileMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+          }`}
+        />
+        <aside
+          id="mobile-nav-drawer"
+          role="dialog"
+          aria-modal="true"
+          className={`absolute top-0 right-0 h-dvh w-[85vw] max-w-sm overflow-y-auto bg-white px-6 pt-24 pb-8 shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none ${
+            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <nav className="mx-auto flex w-full flex-col gap-8">
             <section>
               <h2 className="text-muted-foreground text-xs font-semibold tracking-[0.14em] uppercase">
                 Plumbing Services
@@ -333,8 +366,8 @@ export function SiteHeader() {
               </Link>
             </div>
           </nav>
-        </div>
-      )}
+        </aside>
+      </div>
     </>
   );
 }
