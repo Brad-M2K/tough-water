@@ -62,6 +62,8 @@ export function SiteHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownTriggerClass =
     "bg-transparent font-bold text-[#36467F] hover:bg-transparent hover:text-[#36467F] focus:bg-transparent focus:text-[#36467F] data-[state=open]:bg-transparent data-[state=open]:hover:bg-transparent data-[state=open]:text-[#36467F]";
+  const navCtaClass =
+    "relative inline-flex overflow-hidden rounded-md bg-[#36467F] font-semibold text-white transition-opacity hover:opacity-90 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-[38%] after:bg-[#4A6EA7] after:transition-[height,clip-path] after:duration-300 after:ease-out after:[clip-path:polygon(0_45%,12%_70%,24%_52%,37%_74%,52%_50%,66%_72%,79%_54%,91%_73%,100%_58%,100%_100%,0_100%)] hover:after:h-full hover:after:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]";
 
   useEffect(() => {
     const updateNavBackground = () => {
@@ -224,11 +226,8 @@ export function SiteHeader() {
             >
               <FaLinkedinIn className="size-4" />
             </Link>
-            <Link
-              href="/#contact"
-              className="rounded-md bg-[#36467F] px-4 py-1 text-lg font-semibold text-white transition-opacity hover:opacity-90"
-            >
-              Get in Touch
+            <Link href="/#contact" className={`${navCtaClass} px-4 py-1 text-lg`}>
+              <span className="relative z-10">Get in Touch</span>
             </Link>
           </div>
 
@@ -359,10 +358,10 @@ export function SiteHeader() {
               </div>
               <Link
                 href="/#contact"
-                className="mt-4 block rounded-md bg-[#36467F] px-4 py-2.5 text-center text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                className={`${navCtaClass} mt-4 flex w-full justify-center px-4 py-2.5 text-sm`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Get in Touch
+                <span className="relative z-10">Get in Touch</span>
               </Link>
             </div>
           </nav>
