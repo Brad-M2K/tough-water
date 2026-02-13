@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { CircleCheckBig } from "lucide-react";
 
 const serviceLinks = [
   {
@@ -36,6 +37,18 @@ const complianceLinks = [
   },
 ];
 
+const heroServiceHighlights = [
+  "Commercial Plumbing Maintenance & Repairs",
+  "Legionella Risk Assessments & Monitoring",
+  "Remedial Works, Sampling & Compliance Support",
+];
+
+const accreditationLogos = [
+  { src: "/CHAS.webp", alt: "CHAS accreditation", width: 180, height: 64 },
+  { src: "/WIAPS.svg", alt: "WIAPS accreditation", width: 180, height: 64 },
+  { src: "/SafeContractor.png", alt: "SafeContractor accreditation", width: 180, height: 64 },
+];
+
 export default function Home() {
   return (
     <div className="from-background via-background to-muted/30 min-h-screen bg-linear-to-b">
@@ -63,13 +76,34 @@ export default function Home() {
             </div>
             <div className="rounded-2xl bg-gray-100/60 p-6">
               <h2 className="text-xl font-bold tracking-tight text-[#36467F]">Our Services</h2>
-              <p className="mt-3 text-base font-semibold text-[#36467F]">
-                End-to-end support for safer, compliant water systems.
+              <div className="mt-3 space-y-3">
+                {heroServiceHighlights.map((service) => (
+                  <div key={service}>
+                    <div className="flex items-center gap-3">
+                      <CircleCheckBig className="size-5 shrink-0 text-[#9acb8d]" />
+                      <p className="text-base font-medium text-[#36467F]">{service}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="my-5 h-px bg-[#36467F]/15" />
+              <p className="text-[#36467F]">
+                Fully compliant with HSE ACOP L8 and HSG274 guidance. Supporting businesses across
+                Yorkshire and the UK for over 15 years.
               </p>
-              <p className="text-muted-foreground mt-4 text-base leading-7">
-                Trusted by facilities teams and property managers for practical compliance delivery
-                and long-term system reliability.
-              </p>
+              <div className="mt-5 grid grid-cols-3 gap-2">
+                {accreditationLogos.map((logo) => (
+                  <div key={logo.src} className="flex h-16 items-center justify-center p-1.5">
+                    <Image
+                      src={logo.src}
+                      alt={logo.alt}
+                      width={logo.width}
+                      height={logo.height}
+                      className="max-h-11 w-auto object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
           <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-[35%]">
@@ -92,7 +126,7 @@ export default function Home() {
             className="object-cover object-center"
             priority
           />
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 z-20">
             <div className="mx-auto grid h-full w-full max-w-6xl gap-10 px-6 py-12 md:grid-cols-[1.4fr_1fr] md:items-start">
               <div className="space-y-6">
                 <h1 className="max-w-3xl text-[clamp(2rem,3.2vw,3.75rem)] font-bold tracking-tight text-[#36467F]">
@@ -106,19 +140,42 @@ export default function Home() {
                   commercial and residential properties across the UK.
                 </p>
               </div>
-              <div className="rounded-2xl bg-gray-100/60 p-10">
-                <h2 className="text-2xl font-bold tracking-tight text-[#36467F]">Our Services</h2>
-                <p className="mt-4 text-lg font-medium text-[#36467F]">
-                  End-to-end support for safer, compliant water systems.
+              <div className="rounded-2xl bg-gray-100/60 p-8">
+                <h2 className="text-xl font-bold tracking-tight text-[#36467F]">Our Services</h2>
+                <div className="mt-3 space-y-3">
+                  {heroServiceHighlights.map((service) => (
+                    <div key={service}>
+                      <div className="flex items-center gap-3">
+                        <CircleCheckBig className="size-5 shrink-0 text-[#9acb8d]" />
+                        <p className="text-lg leading-tight font-medium text-[#36467F]">
+                          {service}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="my-6 h-px bg-[#36467F]/15" />
+                <p className="max-w-xl text-base leading-relaxed text-[#36467F]">
+                  Fully compliant with HSE ACOP L8 and HSG274 guidance. Supporting businesses across
+                  Yorkshire and the UK for over 15 years.
                 </p>
-                <p className="text-muted-foreground mt-5 text-lg leading-relaxed">
-                  Trusted by facilities teams and property managers for practical compliance
-                  delivery and long-term system reliability.
-                </p>
+                <div className="mt-6 grid grid-cols-3 gap-3">
+                  {accreditationLogos.map((logo) => (
+                    <div key={logo.src} className="flex h-20 items-center justify-center p-1.5">
+                      <Image
+                        src={logo.src}
+                        alt={logo.alt}
+                        width={logo.width}
+                        height={logo.height}
+                        className="max-h-14 w-auto object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-[35%]">
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 translate-y-[35%]">
             <Image
               src="/water-splash-seperation.png"
               alt=""
