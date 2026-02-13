@@ -43,6 +43,9 @@ const heroServiceHighlights = [
   "Remedial Works, Sampling & Compliance Support",
 ];
 
+const companyStartYear = 2007;
+const yearsServing = new Date().getFullYear() - companyStartYear;
+
 const accreditationLogos = [
   { src: "/CHAS.webp", alt: "CHAS accreditation", width: 180, height: 64 },
   { src: "/WIAPS.svg", alt: "WIAPS accreditation", width: 180, height: 64 },
@@ -89,7 +92,7 @@ export default function Home() {
               <div className="my-5 h-px bg-[#36467F]/15" />
               <p className="text-[#36467F]">
                 Fully compliant with HSE ACOP L8 and HSG274 guidance. Supporting businesses across
-                Yorkshire and the UK for over 15 years.
+                Yorkshire and full UK-wide coverage for over {yearsServing} years.
               </p>
               <div className="mt-5 grid grid-cols-3 gap-2">
                 {accreditationLogos.map((logo) => (
@@ -157,7 +160,7 @@ export default function Home() {
                 <div className="my-6 h-px bg-[#36467F]/15" />
                 <p className="max-w-xl text-base leading-relaxed text-[#36467F]">
                   Fully compliant with HSE ACOP L8 and HSG274 guidance. Supporting businesses across
-                  Yorkshire and the UK for over 15 years.
+                  Yorkshire and full UK-wide coverage for over {yearsServing} years.
                 </p>
                 <div className="mt-6 grid grid-cols-3 gap-3">
                   {accreditationLogos.map((logo) => (
