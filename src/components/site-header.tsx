@@ -139,7 +139,12 @@ export function SiteHeader() {
             showNavBackground ? "py-2" : "py-4"
           }`}
         >
-          <Link href="/" className="shrink-0">
+          <Link
+            href="/"
+            className={`shrink-0 transition-opacity duration-200 lg:opacity-100 ${
+              isMobileMenuOpen ? "pointer-events-none opacity-0" : "opacity-100"
+            }`}
+          >
             <Image
               src="/tws-logo-wordmark.png"
               alt="Tough Water"
@@ -283,6 +288,20 @@ export function SiteHeader() {
           }`}
         >
           <nav className="mx-auto flex w-full flex-col gap-8">
+            <Link
+              href="/"
+              className="flex justify-start"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <Image
+                src="/tws-logo-wordmark.png"
+                alt="Tough Water"
+                width={240}
+                height={52}
+                className="h-9 w-auto"
+              />
+            </Link>
+
             <section>
               <h2 className="text-muted-foreground text-xs font-semibold tracking-[0.14em] uppercase">
                 Plumbing Services
