@@ -41,7 +41,7 @@ export default function Home() {
     <div className="from-background via-background to-muted/30 min-h-screen bg-linear-to-b">
       <section className="relative mb-[clamp(7rem,10vw,12rem)] w-full">
         <div
-          className="md:hidden"
+          className="relative overflow-visible md:hidden"
           style={{
             backgroundImage: "url('/border-splash-hero.png')",
             backgroundSize: "100% auto",
@@ -71,6 +71,15 @@ export default function Home() {
                 and long-term system reliability.
               </p>
             </div>
+          </div>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-[35%]">
+            <Image
+              src="/water-splash-seperation.png"
+              alt=""
+              width={4249}
+              height={700}
+              className="mx-auto w-full"
+            />
           </div>
         </div>
 
