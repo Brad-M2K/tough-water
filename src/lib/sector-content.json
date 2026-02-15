@@ -1,0 +1,87 @@
+[
+  {
+    "id": "education",
+    "label": "Education",
+    "title": "Schools, Colleges & Universities",
+    "summary": "Planned water hygiene and compliance support for busy education estates with minimal disruption.",
+    "image": {
+      "src": "https://images.unsplash.com/photo-1661776724331-648bac1d2927?auto=format&fit=crop&fm=jpg&q=70&w=1800",
+      "alt": "University-style education campus courtyard",
+      "creditName": "Emediong Umoh",
+      "creditUrl": "https://unsplash.com/photos/a-courtyard-with-a-few-buildings-and-trees-qfs70uMDH4o"
+    },
+    "highlights": [
+      "Holiday and term-time scheduling",
+      "Site-wide legionella risk management",
+      "Asset registers and compliance logs"
+    ]
+  },
+  {
+    "id": "healthcare",
+    "label": "Healthcare",
+    "title": "Healthcare & Care Environments",
+    "summary": "Risk-led monitoring and remedial support for healthcare buildings where water safety standards are critical.",
+    "image": {
+      "src": "https://images.unsplash.com/photo-1755995083683-50d08cd83d09?auto=format&fit=crop&fm=jpg&q=70&w=1800",
+      "alt": "Healthcare corridor interior",
+      "creditName": "Fabio Sasso",
+      "creditUrl": "https://unsplash.com/photos/well-lit-hospital-hallway-with-doors-at-the-end-of-the-corridor-jhSkpyCwJI0"
+    },
+    "highlights": [
+      "Sampling and temperature monitoring",
+      "Remedial recommendations with clear priorities",
+      "Audit-ready reporting for governance teams"
+    ]
+  },
+  {
+    "id": "fm",
+    "label": "Facilities",
+    "title": "Facilities Management Portfolios",
+    "summary": "Reliable delivery model for multi-site FM contracts across Yorkshire and UK-wide operations.",
+    "image": {
+      "src": "https://images.unsplash.com/photo-1636734893043-d9c52b0ae0a7?auto=format&fit=crop&fm=jpg&q=70&w=1800",
+      "alt": "Commercial office building viewed through a window",
+      "creditName": "Nicholas Ismael Martinez",
+      "creditUrl": "https://unsplash.com/photos/a-view-of-a-building-through-a-window-BxlI-6WUTRo"
+    },
+    "highlights": [
+      "Standardised processes across sites",
+      "Named contacts and scheduled visits",
+      "Consistent documentation for client handover"
+    ]
+  },
+  {
+    "id": "industrial",
+    "label": "Industrial",
+    "title": "Industrial & Manufacturing Sites",
+    "summary": "Practical compliance works designed around operational constraints in warehouses, plants and production spaces.",
+    "image": {
+      "src": "https://images.unsplash.com/photo-1761519609119-fa20763499f9?auto=format&fit=crop&fm=jpg&q=70&w=1800",
+      "alt": "Industrial building interior with steel structure",
+      "creditName": "Sean Thoman",
+      "creditUrl": "https://unsplash.com/photos/industrial-interior-with-large-windows-and-walkway-Ssldumx1Nro"
+    },
+    "highlights": [
+      "Low-disruption planned maintenance",
+      "System upgrades and remedial works",
+      "Compliance-first approach with clear timelines"
+    ]
+  },
+  {
+    "id": "commercial",
+    "label": "Commercial",
+    "title": "Commercial Estates & Property Groups",
+    "summary": "Ongoing planned support for offices, mixed-use developments and large commercial property portfolios.",
+    "image": {
+      "src": "https://images.unsplash.com/photo-1676637391167-11bc4ae5396b?auto=format&fit=crop&fm=jpg&q=70&w=1800",
+      "alt": "Large warehouse and logistics interior",
+      "creditName": "German Krupenin",
+      "creditUrl": "https://unsplash.com/photos/a-room-with-a-lot-of-shelves-and-lights-0h2rNC9-QWE"
+    },
+    "highlights": [
+      "Routine checks and service schedules",
+      "Consistent standards across properties",
+      "Clear reporting for stakeholders"
+    ]
+  }
+]

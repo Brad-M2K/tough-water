@@ -77,7 +77,7 @@ export function SiteHeader() {
         {showNavBackground && (
           <div
             aria-hidden="true"
-            className={`${isMobileMenuOpen ? "opacity-0" : "opacity-100"} pointer-events-none absolute inset-0 bg-white/60 backdrop-blur-2xl backdrop-saturate-150`}
+            className={`${isMobileMenuOpen ? "opacity-0" : "opacity-100"} pointer-events-none absolute inset-0 bg-white`}
           />
         )}
         <div
