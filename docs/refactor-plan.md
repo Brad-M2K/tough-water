@@ -41,7 +41,7 @@ Refactor current homepage/header architecture into cleaner components and token-
   - Replace manual wave class strings in hero/header CTA buttons.
   - Acceptance: Same visuals; CTA style managed in one component.
 
-- [ ] **Step 4: Split header into Desktop and Mobile components**
+- [x] **Step 4: Split header into Desktop and Mobile components**
   - Create `src/components/header/desktop-nav.tsx` and `src/components/header/mobile-nav-drawer.tsx`.
   - Keep shared state in `site-header.tsx`; pass props down.
   - Acceptance: Behavior identical; file readability improved.
