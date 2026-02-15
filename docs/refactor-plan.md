@@ -46,17 +46,12 @@ Refactor current homepage/header architecture into cleaner components and token-
   - Keep shared state in `site-header.tsx`; pass props down.
   - Acceptance: Behavior identical; file readability improved.
 
-- [ ] **Step 5: Normalize mobile hero typography scale**
-  - In `hero-section`, establish a consistent type scale (title > subtitle > body; card title > card list > card body) using clear tokenized/text utilities.
-  - Mobile-only tuning; desktop unchanged.
-  - Acceptance: Better proportional rhythm on mobile.
-
 - [ ] **Step 6: Extract repeated section shells in page**
   - Create a small reusable section wrapper and/or service card component for repeated `bg-card rounded-2xl border` blocks.
   - Apply in `page.tsx` only where duplication is obvious.
   - Acceptance: Less repeated JSX; no visual regression.
 
-- [ ] **Step 7: Token migration pass in components**
+- [x] **Step 7: Token migration pass in components**
   - Replace hardcoded colors (`#36467F`, `#4A6EA7`, etc.) with token-based utility usage across `hero-section`, `site-header`, `navigation-menu`.
   - Keep exact visual look by mapping tokens to current values first.
   - Acceptance: One-source color control.

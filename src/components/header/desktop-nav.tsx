@@ -13,7 +13,7 @@ import { WaveButton } from "@/components/ui/wave-button";
 import { complianceLinks, primaryLinks, serviceLinks } from "@/lib/site-content";
 
 const dropdownTriggerClass =
-  "bg-transparent font-bold text-[#36467F] hover:bg-transparent hover:text-[#36467F] focus:bg-transparent focus:text-[#36467F] data-[state=open]:bg-transparent data-[state=open]:hover:bg-transparent data-[state=open]:text-[#36467F]";
+  "bg-transparent font-bold text-brand hover:bg-transparent hover:text-brand focus:bg-transparent focus:text-brand data-[state=open]:bg-transparent data-[state=open]:hover:bg-transparent data-[state=open]:text-brand";
 
 export function DesktopNav() {
   return (
@@ -31,7 +31,7 @@ export function DesktopNav() {
                   <li key={item.title}>
                     <NavigationMenuLink asChild>
                       <Link href={item.href} className="rounded-md p-3">
-                        <div className="text-sm font-medium text-[#36467F]">{item.title}</div>
+                        <div className="text-brand text-sm font-medium">{item.title}</div>
                         <p className="text-muted-foreground mt-1 text-sm leading-snug">
                           {item.description}
                         </p>
@@ -53,7 +53,7 @@ export function DesktopNav() {
                   <li key={item.title}>
                     <NavigationMenuLink asChild>
                       <Link href={item.href} className="rounded-md p-3">
-                        <div className="text-sm font-medium text-[#36467F]">{item.title}</div>
+                        <div className="text-brand text-sm font-medium">{item.title}</div>
                         <p className="text-muted-foreground mt-1 text-sm leading-snug">
                           {item.description}
                         </p>
@@ -68,7 +68,7 @@ export function DesktopNav() {
           {primaryLinks.map((item) => (
             <NavigationMenuItem key={item.label}>
               <NavigationMenuLink asChild>
-                <Link href={item.href} className="font-semibold text-[#36467F]">
+                <Link href={item.href} className="text-brand font-semibold">
                   {item.label}
                 </Link>
               </NavigationMenuLink>
@@ -78,18 +78,18 @@ export function DesktopNav() {
       </NavigationMenu>
 
       <div className="hidden items-center gap-4 lg:flex">
-        <div className="h-10 w-px bg-[#36467F]/30" />
+        <div className="bg-brand/30 h-10 w-px" />
         <Link
           href="#"
           aria-label="Facebook"
-          className="inline-flex h-7 w-7 items-center justify-center rounded-sm bg-[#36467F] text-white transition-opacity hover:opacity-90"
+          className="bg-brand text-brand-foreground inline-flex h-7 w-7 items-center justify-center rounded-sm transition-opacity hover:opacity-90"
         >
           <FaFacebookF className="size-4" />
         </Link>
         <Link
           href="#"
           aria-label="LinkedIn"
-          className="inline-flex h-7 w-7 items-center justify-center rounded-sm bg-[#36467F] text-white transition-opacity hover:opacity-90"
+          className="bg-brand text-brand-foreground inline-flex h-7 w-7 items-center justify-center rounded-sm transition-opacity hover:opacity-90"
         >
           <FaLinkedinIn className="size-4" />
         </Link>

@@ -116,19 +116,19 @@ export function SiteHeader() {
           >
             <span
               aria-hidden="true"
-              className={`absolute h-0.5 w-6 rounded bg-[#36467F] transition-transform duration-300 ${
+              className={`bg-brand absolute h-0.5 w-6 rounded transition-transform duration-300 ${
                 isMobileMenuOpen ? "translate-y-0 rotate-45" : "-translate-y-2"
               }`}
             />
             <span
               aria-hidden="true"
-              className={`absolute h-0.5 w-6 rounded bg-[#36467F] transition-opacity duration-300 ${
+              className={`bg-brand absolute h-0.5 w-6 rounded transition-opacity duration-300 ${
                 isMobileMenuOpen ? "opacity-0" : "opacity-100"
               }`}
             />
             <span
               aria-hidden="true"
-              className={`absolute h-0.5 w-6 rounded bg-[#36467F] transition-transform duration-300 ${
+              className={`bg-brand absolute h-0.5 w-6 rounded transition-transform duration-300 ${
                 isMobileMenuOpen ? "translate-y-0 -rotate-45" : "translate-y-2"
               }`}
             />

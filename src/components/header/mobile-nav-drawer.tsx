@@ -98,12 +98,12 @@ export function MobileNavDrawer({ isOpen, onClose }: MobileNavDrawerProps) {
               </ul>
             </section>
 
-            <div className="mt-2 border-t border-[#36467F]/20 pt-6">
+            <div className="border-brand/20 mt-2 border-t pt-6">
               <div className="flex items-center justify-center gap-4">
                 <Link
                   href="#"
                   aria-label="Facebook"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-[#36467F] text-white transition-opacity hover:opacity-90"
+                  className="bg-brand text-brand-foreground inline-flex h-10 w-10 items-center justify-center rounded-sm transition-opacity hover:opacity-90"
                   onClick={onClose}
                 >
                   <FaFacebookF className="size-5" />
@@ -111,7 +111,7 @@ export function MobileNavDrawer({ isOpen, onClose }: MobileNavDrawerProps) {
                 <Link
                   href="#"
                   aria-label="LinkedIn"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-[#36467F] text-white transition-opacity hover:opacity-90"
+                  className="bg-brand text-brand-foreground inline-flex h-10 w-10 items-center justify-center rounded-sm transition-opacity hover:opacity-90"
                   onClick={onClose}
                 >
                   <FaLinkedinIn className="size-5" />

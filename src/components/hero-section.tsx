@@ -20,12 +20,10 @@ export function HeroSection() {
       >
         <div className="mx-auto grid w-full max-w-6xl gap-4 px-5 py-4">
           <div className="flex-center space-y-3">
-            <h1 className="max-w-3xl text-lg leading-tight font-bold tracking-tight text-[#36467F]">
+            <h1 className="text-brand max-w-3xl text-lg leading-tight font-bold tracking-tight">
               Clean Water. Safe Systems. Full Compliance.
             </h1>
-            <p className="text-md font-semibold text-[#36467F]">
-              Professional Water Hygiene Services
-            </p>
+            <p className="text-md text-brand font-semibold">Professional Water Hygiene Services</p>
             <p className="text-muted-foreground max-w-3xl text-sm leading-7">
               Professional legionella risk assessments, monitoring, and remedial works for
               commercial and residential properties across the UK.
@@ -35,19 +33,19 @@ export function HeroSection() {
             </WaveButton>
           </div>
           <div className="z-10 rounded-2xl border border-gray-300/30 bg-gray-100/30 p-6 backdrop-blur-sm">
-            <h2 className="text-lg font-bold tracking-tight text-[#36467F]">Our Services</h2>
+            <h2 className="text-brand text-lg font-bold tracking-tight">Our Services</h2>
             <div className="mt-2.5 space-y-2.5">
               {heroServiceHighlights.map((service) => (
                 <div key={service}>
                   <div className="flex items-center gap-2.5">
-                    <CircleCheckBig className="size-4 shrink-0 text-[#9acb8d]" />
-                    <p className="text-sm font-medium text-[#36467F]">{service}</p>
+                    <CircleCheckBig className="text-brand-success size-4 shrink-0" />
+                    <p className="text-brand text-sm font-medium">{service}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="my-3.5 h-px bg-[#36467F]/15" />
-            <p className="text-xs text-[#36467F]">
+            <div className="bg-brand/15 my-3.5 h-px" />
+            <p className="text-brand text-xs">
               Fully compliant with HSE ACOP L8 and HSG274 guidance. Supporting businesses across
               Yorkshire and full UK-wide coverage for over {yearsServing} years.
             </p>
@@ -90,12 +88,10 @@ export function HeroSection() {
         <div className="absolute inset-0 z-20">
           <div className="mx-auto grid h-full w-full max-w-6xl gap-10 px-6 py-12 lg:grid-cols-[1.4fr_1fr] lg:items-start">
             <div className="space-y-6">
-              <h1 className="max-w-3xl text-[clamp(2rem,3.2vw,3.75rem)] font-bold tracking-tight text-[#36467F]">
+              <h1 className="text-brand max-w-3xl text-[clamp(2rem,3.2vw,3.75rem)] font-bold tracking-tight">
                 Clean Water. Safe Systems. Full Compliance.
               </h1>
-              <p className="text-xl font-medium text-[#36467F]">
-                Professional Water Hygiene Services
-              </p>
+              <p className="text-brand text-xl font-medium">Professional Water Hygiene Services</p>
               <p className="text-muted-foreground max-w-3xl text-xl leading-relaxed">
                 Professional legionella risk assessments, monitoring, and remedial works for
                 commercial and residential properties across the UK.
@@ -105,19 +101,19 @@ export function HeroSection() {
               </WaveButton>
             </div>
             <div className="rounded-2xl border border-gray-300/30 bg-gray-100/30 p-8 backdrop-blur-sm">
-              <h2 className="text-xl font-bold tracking-tight text-[#36467F]">Our Services</h2>
+              <h2 className="text-brand text-xl font-bold tracking-tight">Our Services</h2>
               <div className="mt-3 space-y-3">
                 {heroServiceHighlights.map((service) => (
                   <div key={service}>
                     <div className="flex items-center gap-3">
-                      <CircleCheckBig className="size-5 shrink-0 text-[#9acb8d]" />
-                      <p className="text-lg leading-tight font-medium text-[#36467F]">{service}</p>
+                      <CircleCheckBig className="text-brand-success size-5 shrink-0" />
+                      <p className="text-brand text-lg leading-tight font-medium">{service}</p>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="my-6 h-px bg-[#36467F]/15" />
-              <p className="max-w-xl text-base leading-relaxed text-[#36467F]">
+              <div className="bg-brand/15 my-6 h-px" />
+              <p className="text-brand max-w-xl text-base leading-relaxed">
                 Fully compliant with HSE ACOP L8 and HSG274 guidance. Supporting businesses across
                 Yorkshire and full UK-wide coverage for over {yearsServing} years.
               </p>
