@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import sectors from "@/lib/sector-content.json";
 
 type Sector = {
@@ -22,23 +22,67 @@ const sectorItems = sectors as Sector[];
 
 export function SectorsShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const mobilePillRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const resumeTimerRef = useRef<number | null>(null);
+
+  const queueMobileResume = () => {
+    if (resumeTimerRef.current) {
+      window.clearTimeout(resumeTimerRef.current);
+    }
+    resumeTimerRef.current = window.setTimeout(() => {
+      setIsPaused(false);
+    }, 3000);
+  };
 
   useEffect(() => {
+    if (isPaused) {
+      return;
+    }
+
     const intervalId = window.setInterval(() => {
       setActiveIndex((current) => (current + 1) % sectorItems.length);
-    }, 4500);
+    }, 3000);
 
     return () => window.clearInterval(intervalId);
+  }, [isPaused]);
+
+  useEffect(() => {
+    if (window.innerWidth >= 768) {
+      return;
+    }
+
+    mobilePillRefs.current[activeIndex]?.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  }, [activeIndex]);
+
+  useEffect(() => {
+    return () => {
+      if (resumeTimerRef.current) {
+        window.clearTimeout(resumeTimerRef.current);
+      }
+    };
   }, []);
 
   const activeSector = sectorItems[activeIndex];
 
   return (
-    <section id="sectors" className="relative py-10 md:py-16">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0" />
-      <div className="mx-auto w-full max-w-6xl px-5 md:px-6">
-        <div className="border-brand/10 relative rounded-3xl border bg-white p-4 shadow-sm md:p-8">
-          <div className="max-w-3xl rounded-xl bg-white/30 p-2 backdrop-blur-sm">
+    <section id="sectors" className="relative overflow-hidden py-10 md:py-16">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
+        <Image
+          src="/line.svg"
+          alt=""
+          width={2200}
+          height={320}
+          className="absolute top-1/2 left-1/2 min-w-225 -translate-x-1/2 -translate-y-1/2 opacity-80 md:w-[125vw]"
+        />
+      </div>
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-5 md:px-6">
+        <div className="border-brand/10 relative rounded-3xl border bg-gray-100/30 p-4 shadow-sm backdrop-blur-md md:p-8">
+          <div className="max-w-3xl rounded-xl">
             <p className="text-brand/70 text-xs font-semibold tracking-[0.12em] uppercase md:text-sm">
               Who We Work With
             </p>
@@ -59,7 +103,18 @@ export function SectorsShowcase() {
                 <button
                   key={sector.id}
                   type="button"
-                  onClick={() => setActiveIndex(index)}
+                  ref={(el) => {
+                    mobilePillRefs.current[index] = el;
+                  }}
+                  onClick={() => {
+                    setActiveIndex(index);
+                    setIsPaused(true);
+                    queueMobileResume();
+                  }}
+                  onFocus={() => setIsPaused(true)}
+                  onBlur={() => setIsPaused(false)}
+                  onMouseEnter={() => setIsPaused(true)}
+                  onMouseLeave={() => setIsPaused(false)}
                   className={`rounded-full border px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-colors duration-300 md:px-4 md:py-2 md:text-sm ${
                     isActive
                       ? "border-brand bg-brand text-brand-foreground"
@@ -122,7 +177,7 @@ export function SectorsShowcase() {
                   Typical Support
                 </p>
                 <ul className="mt-2.5 space-y-2 md:mt-3 md:space-y-2.5">
-                  {activeSector.highlights.map((highlight) => (
+                  {activeSector.highlights.slice(0, 2).map((highlight) => (
                     <li
                       key={highlight}
                       className="text-brand flex items-start gap-2.5 text-xs md:text-base"
