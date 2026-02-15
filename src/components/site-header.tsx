@@ -2,7 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
+import { WaveButton } from "@/components/ui/wave-button";
+import { complianceLinks, primaryLinks, serviceLinks } from "@/lib/site-content";
 
 import {
   NavigationMenu,
@@ -13,52 +16,12 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
-const primaryLinks = [
-  { href: "/#about", label: "About" },
-  { href: "/#coverage", label: "Coverage" },
-  { href: "/#contact", label: "Contact" },
-];
-
-const serviceLinks = [
-  {
-    href: "/#services",
-    title: "Emergency Plumbing",
-    description: "24/7 response for leaks, bursts, and no-water incidents.",
-  },
-  {
-    href: "/#services",
-    title: "Planned Maintenance",
-    description: "Routine checks for commercial and multi-site properties.",
-  },
-  {
-    href: "/#services",
-    title: "Installations & Upgrades",
-    description: "Pipework, valves, boosters, and system modernisation.",
-  },
-];
-
-const complianceLinks = [
-  {
-    href: "/#hygiene",
-    title: "Legionella Risk Control",
-    description: "Monitoring, sampling, and control-scheme execution.",
-  },
-  {
-    href: "/#hygiene",
-    title: "Water Hygiene Remediation",
-    description: "Tank cleaning, disinfection, and corrective works.",
-  },
-  {
-    href: "/#hygiene",
-    title: "Compliance Documentation",
-    description: "Audit-ready records and clear reporting for stakeholders.",
-  },
-];
-
 export function SiteHeader() {
   const waveRef = useRef<HTMLDivElement>(null);
   const [showNavBackground, setShowNavBackground] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const dropdownTriggerClass =
+    "bg-transparent font-bold text-[#36467F] hover:bg-transparent hover:text-[#36467F] focus:bg-transparent focus:text-[#36467F] data-[state=open]:bg-transparent data-[state=open]:hover:bg-transparent data-[state=open]:text-[#36467F]";
 
   useEffect(() => {
     const updateNavBackground = () => {
@@ -96,53 +59,76 @@ export function SiteHeader() {
     };
   }, []);
 
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, []);
+
   return (
     <>
-      <div ref={waveRef} aria-hidden="true" className="w-screen overflow-hidden leading-none">
+      <div ref={waveRef} aria-hidden="true" className="w-full overflow-hidden leading-none">
         <Image
           src="/tws-wave-top.svg"
           alt=""
           width={4245}
           height={75}
-          className="block h-auto w-full"
+          className="mx-auto block h-auto w-full max-w-480"
           priority
         />
       </div>
 
-      <header
-        className={`sticky top-0 z-30 transition-colors ${
-          showNavBackground ? "bg-white" : "bg-transparent"
-        }`}
-      >
+      <header className="sticky top-0 z-50">
+        {showNavBackground && (
+          <div
+            aria-hidden="true"
+            className={`${isMobileMenuOpen ? "opacity-0" : "opacity-100"} pointer-events-none absolute inset-0 bg-white/60 backdrop-blur-2xl backdrop-saturate-150`}
+          />
+        )}
         <div
-          className={`mx-auto flex w-full max-w-6xl items-center justify-between px-6 transition-all duration-300 ${
+          className={`relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-6 transition-all duration-300 ${
             showNavBackground ? "py-2" : "py-4"
           }`}
         >
-          <Link href="/" className="shrink-0">
+          <Link
+            href="/"
+            className={`shrink-0 transition-opacity duration-200 lg:opacity-100 ${
+              isMobileMenuOpen ? "pointer-events-none opacity-0" : "opacity-100"
+            }`}
+          >
             <Image
               src="/tws-logo-wordmark.png"
               alt="Tough Water"
               width={300}
               height={64}
               className={`w-auto transition-all duration-300 ${
-                showNavBackground ? "h-12 md:h-13" : "h-16 md:h-20"
+                showNavBackground ? "h-8 md:h-13" : "h-10 md:h-20"
               }`}
               priority
             />
           </Link>
 
+          {/* Desktop navigation (visible on lg+) */}
           <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Plumbing Services</NavigationMenuTrigger>
+                <NavigationMenuTrigger className={dropdownTriggerClass}>
+                  Plumbing Services
+                </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-105 gap-2 md:grid-cols-1">
                     {serviceLinks.map((item) => (
                       <li key={item.title}>
                         <NavigationMenuLink asChild>
                           <Link href={item.href} className="rounded-md p-3">
-                            <div className="text-sm font-medium">{item.title}</div>
+                            <div className="text-sm font-medium text-[#36467F]">{item.title}</div>
                             <p className="text-muted-foreground mt-1 text-sm leading-snug">
                               {item.description}
                             </p>
@@ -155,14 +141,16 @@ export function SiteHeader() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <NavigationMenuTrigger>Water Hygiene</NavigationMenuTrigger>
+                <NavigationMenuTrigger className={dropdownTriggerClass}>
+                  Water Hygiene
+                </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-105 gap-2 md:grid-cols-1">
                     {complianceLinks.map((item) => (
                       <li key={item.title}>
                         <NavigationMenuLink asChild>
                           <Link href={item.href} className="rounded-md p-3">
-                            <div className="text-sm font-medium">{item.title}</div>
+                            <div className="text-sm font-medium text-[#36467F]">{item.title}</div>
                             <p className="text-muted-foreground mt-1 text-sm leading-snug">
                               {item.description}
                             </p>
@@ -177,34 +165,44 @@ export function SiteHeader() {
               {primaryLinks.map((item) => (
                 <NavigationMenuItem key={item.label}>
                   <NavigationMenuLink asChild>
-                    <Link href={item.href}>{item.label}</Link>
+                    <Link href={item.href} className="font-semibold text-[#36467F]">
+                      {item.label}
+                    </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
             </NavigationMenuList>
           </NavigationMenu>
 
-          <div className="hidden items-center gap-2 lg:flex">
+          <div className="hidden items-center gap-4 lg:flex">
+            <div className="h-10 w-px bg-[#36467F]/30" />
             <Link
-              href="tel:+441234567890"
-              className="rounded-md border px-3 py-2 text-sm font-medium"
+              href="#"
+              aria-label="Facebook"
+              className="inline-flex h-7 w-7 items-center justify-center rounded-sm bg-[#36467F] text-white transition-opacity hover:opacity-90"
             >
-              24/7 Callout
+              <FaFacebookF className="size-4" />
             </Link>
             <Link
-              href="/#contact"
-              className="rounded-md bg-[#36467F] px-3 py-2 text-sm font-medium text-white"
+              href="#"
+              aria-label="LinkedIn"
+              className="inline-flex h-7 w-7 items-center justify-center rounded-sm bg-[#36467F] text-white transition-opacity hover:opacity-90"
             >
-              Request Quote
+              <FaLinkedinIn className="size-4" />
             </Link>
+            <WaveButton href="/#contact" className="px-4 py-1 text-lg">
+              Get in Touch
+            </WaveButton>
           </div>
 
+          {/* Mobile menu trigger (visible below lg) */}
           <button
             type="button"
             aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-nav-drawer"
             onClick={() => setIsMobileMenuOpen((open) => !open)}
-            className="relative inline-flex h-10 w-10 items-center justify-center lg:hidden"
+            className="relative z-50 inline-flex h-10 w-10 items-center justify-center lg:hidden"
           >
             <span
               aria-hidden="true"
@@ -228,9 +226,43 @@ export function SiteHeader() {
         </div>
       </header>
 
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-20 overflow-y-auto bg-white px-6 pt-28 pb-8 lg:hidden">
-          <nav className="mx-auto flex w-full max-w-6xl flex-col gap-8">
+      {/* Mobile slide-out drawer navigation */}
+      <div
+        className={`fixed inset-0 z-40 lg:hidden ${
+          isMobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
+        }`}
+      >
+        <button
+          type="button"
+          aria-label="Close mobile menu"
+          onClick={() => setIsMobileMenuOpen(false)}
+          className={`absolute inset-0 transition-opacity duration-300 ${
+            isMobileMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+          }`}
+        />
+        <aside
+          id="mobile-nav-drawer"
+          role="dialog"
+          aria-modal="true"
+          className={`absolute top-0 right-0 h-dvh w-[85vw] max-w-sm overflow-y-auto bg-white/30 px-6 pt-24 pb-8 shadow-2xl backdrop-blur-xl transition-transform duration-300 ease-out motion-reduce:transition-none ${
+            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <nav className="mx-auto flex w-full flex-col gap-8">
+            <Link
+              href="/"
+              className="flex justify-start"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <Image
+                src="/tws-logo-wordmark.png"
+                alt="Tough Water"
+                width={240}
+                height={52}
+                className="h-9 w-auto"
+              />
+            </Link>
+
             <section>
               <h2 className="text-muted-foreground text-xs font-semibold tracking-[0.14em] uppercase">
                 Plumbing Services
@@ -285,25 +317,36 @@ export function SiteHeader() {
               </ul>
             </section>
 
-            <div className="mt-2 flex flex-col gap-3">
-              <Link
-                href="tel:+441234567890"
-                className="rounded-md border px-4 py-3 text-center text-sm font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                24/7 Callout
-              </Link>
-              <Link
+            <div className="mt-2 border-t border-[#36467F]/20 pt-6">
+              <div className="flex items-center justify-center gap-4">
+                <Link
+                  href="#"
+                  aria-label="Facebook"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-[#36467F] text-white transition-opacity hover:opacity-90"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <FaFacebookF className="size-5" />
+                </Link>
+                <Link
+                  href="#"
+                  aria-label="LinkedIn"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-[#36467F] text-white transition-opacity hover:opacity-90"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  <FaLinkedinIn className="size-5" />
+                </Link>
+              </div>
+              <WaveButton
                 href="/#contact"
-                className="rounded-md bg-[#36467F] px-4 py-3 text-center text-sm font-medium text-white"
+                className="mt-4 flex w-full justify-center px-4 py-2.5 text-sm"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Request Quote
-              </Link>
+                Get in Touch
+              </WaveButton>
             </div>
           </nav>
-        </div>
-      )}
+        </aside>
+      </div>
     </>
   );
 }
