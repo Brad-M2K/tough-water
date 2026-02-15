@@ -23,6 +23,8 @@ const sectorItems = sectors as Sector[];
 export function SectorsShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [hasRevealed, setHasRevealed] = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const mobilePillRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const resumeTimerRef = useRef<number | null>(null);
 
@@ -67,10 +69,29 @@ export function SectorsShowcase() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!sectionRef.current || hasRevealed) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if ((entries[0]?.intersectionRatio ?? 0) >= 0.7) {
+          setHasRevealed(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: [0.7] }
+    );
+
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, [hasRevealed]);
+
   const activeSector = sectorItems[activeIndex];
 
   return (
-    <section id="sectors" className="relative overflow-hidden py-10 md:py-16">
+    <section ref={sectionRef} id="sectors" className="relative overflow-hidden py-10 md:py-16">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
         <Image
           src="/line.svg"
@@ -81,7 +102,13 @@ export function SectorsShowcase() {
         />
       </div>
       <div className="relative z-10 mx-auto w-full max-w-6xl px-5 md:px-6">
-        <div className="border-brand/10 relative rounded-3xl border bg-gray-100/30 p-4 shadow-sm backdrop-blur-md md:p-8">
+        <div
+          className={`border-brand/10 relative rounded-3xl border bg-gray-100/30 p-4 shadow-sm backdrop-blur-md transition-all duration-700 ease-out md:p-8 ${
+            hasRevealed
+              ? "translate-y-0 scale-100 opacity-100"
+              : "translate-y-6 scale-[0.985] opacity-0"
+          }`}
+        >
           <div className="max-w-3xl rounded-xl">
             <p className="text-brand/70 text-xs font-semibold tracking-[0.12em] uppercase md:text-sm">
               Who We Work With
@@ -95,7 +122,11 @@ export function SectorsShowcase() {
             </p>
           </div>
 
-          <div className="mt-6 flex gap-2 overflow-x-auto pb-1 md:mt-8 md:flex-wrap md:overflow-visible">
+          <div
+            className={`mt-6 flex gap-2 overflow-x-auto pb-1 transition-all duration-600 md:mt-8 md:flex-wrap md:overflow-visible ${
+              hasRevealed ? "translate-y-0 opacity-100 delay-100" : "translate-y-2 opacity-0"
+            }`}
+          >
             {sectorItems.map((sector, index) => {
               const isActive = index === activeIndex;
 
@@ -127,7 +158,11 @@ export function SectorsShowcase() {
             })}
           </div>
 
-          <div className="mt-5 grid gap-3 md:mt-8 md:grid-cols-[1.05fr_1fr] md:gap-6">
+          <div
+            className={`mt-5 grid gap-3 transition-all duration-700 md:mt-8 md:grid-cols-[1.05fr_1fr] md:gap-6 ${
+              hasRevealed ? "translate-y-0 opacity-100 delay-200" : "translate-y-4 opacity-0"
+            }`}
+          >
             <figure className="border-brand/15 relative h-44 overflow-hidden rounded-2xl border bg-slate-100 sm:h-52 md:h-88">
               {sectorItems.map((sector, index) => {
                 const isActive = index === activeIndex;
