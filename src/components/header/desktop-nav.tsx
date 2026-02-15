@@ -14,6 +14,10 @@ import { complianceLinks, primaryLinks, serviceLinks } from "@/lib/site-content"
 
 const dropdownTriggerClass =
   "bg-transparent font-bold text-brand hover:bg-transparent hover:text-brand focus:bg-transparent focus:text-brand data-[state=open]:bg-transparent data-[state=open]:hover:bg-transparent data-[state=open]:text-brand";
+const dropdownItemClass =
+  "rounded-md p-3 transition-colors hover:bg-brand/10 focus-visible:bg-brand/10";
+const primaryNavItemClass =
+  "rounded-md px-3 py-2 font-semibold text-brand transition-colors hover:bg-brand/10 focus-visible:bg-brand/10";
 
 export function DesktopNav() {
   return (
@@ -30,7 +34,7 @@ export function DesktopNav() {
                 {serviceLinks.map((item) => (
                   <li key={item.title}>
                     <NavigationMenuLink asChild>
-                      <Link href={item.href} className="rounded-md p-3">
+                      <Link href={item.href} className={dropdownItemClass}>
                         <div className="text-brand text-sm font-medium">{item.title}</div>
                         <p className="text-muted-foreground mt-1 text-sm leading-snug">
                           {item.description}
@@ -52,7 +56,7 @@ export function DesktopNav() {
                 {complianceLinks.map((item) => (
                   <li key={item.title}>
                     <NavigationMenuLink asChild>
-                      <Link href={item.href} className="rounded-md p-3">
+                      <Link href={item.href} className={dropdownItemClass}>
                         <div className="text-brand text-sm font-medium">{item.title}</div>
                         <p className="text-muted-foreground mt-1 text-sm leading-snug">
                           {item.description}
@@ -68,7 +72,7 @@ export function DesktopNav() {
           {primaryLinks.map((item) => (
             <NavigationMenuItem key={item.label}>
               <NavigationMenuLink asChild>
-                <Link href={item.href} className="text-brand font-semibold">
+                <Link href={item.href} className={primaryNavItemClass}>
                   {item.label}
                 </Link>
               </NavigationMenuLink>
