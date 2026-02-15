@@ -1,13 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
 import { CircleCheckBig } from "lucide-react";
+import { WaveButton } from "@/components/ui/wave-button";
 import { accreditationLogos, heroServiceHighlights } from "@/lib/site-content";
 
 const companyStartYear = 2007;
 const yearsServing = new Date().getFullYear() - companyStartYear;
-
-const heroCtaClass =
-  "relative inline-flex overflow-hidden rounded-md bg-[#36467F] px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-[38%] after:bg-[#4A6EA7] after:transition-[height,clip-path] after:duration-300 after:ease-out after:[clip-path:polygon(0_45%,12%_70%,24%_52%,37%_74%,52%_50%,66%_72%,79%_54%,91%_73%,100%_58%,100%_100%,0_100%)] hover:after:h-full hover:after:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]";
 
 export function HeroSection() {
   return (
@@ -33,9 +30,9 @@ export function HeroSection() {
               Professional legionella risk assessments, monitoring, and remedial works for
               commercial and residential properties across the UK.
             </p>
-            <Link href="/#contact" className={heroCtaClass}>
-              <span className="relative z-10">Get in Touch</span>
-            </Link>
+            <WaveButton href="/#contact" className="px-4 py-2 text-sm">
+              Get in Touch
+            </WaveButton>
           </div>
           <div className="z-10 rounded-2xl border border-gray-300/30 bg-gray-100/30 p-6 backdrop-blur-sm">
             <h2 className="text-lg font-bold tracking-tight text-[#36467F]">Our Services</h2>
@@ -103,9 +100,9 @@ export function HeroSection() {
                 Professional legionella risk assessments, monitoring, and remedial works for
                 commercial and residential properties across the UK.
               </p>
-              <Link href="/#contact" className={`${heroCtaClass} px-6 py-3 text-base`}>
-                <span className="relative z-10">Get in Touch</span>
-              </Link>
+              <WaveButton href="/#contact" className="px-6 py-3 text-base">
+                Get in Touch
+              </WaveButton>
             </div>
             <div className="rounded-2xl border border-gray-300/30 bg-gray-100/30 p-8 backdrop-blur-sm">
               <h2 className="text-xl font-bold tracking-tight text-[#36467F]">Our Services</h2>

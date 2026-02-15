@@ -36,7 +36,7 @@ Refactor current homepage/header architecture into cleaner components and token-
   - Replace duplicated local arrays in `page`, `hero-section`, `site-header`.
   - Acceptance: Existing UI unchanged; data sourced from one place.
 
-- [ ] **Step 3: Introduce reusable WaveButton component**
+- [x] **Step 3: Introduce reusable WaveButton component**
   - Create `src/components/ui/wave-button.tsx` wrapping existing wave clip-path animation.
   - Replace manual wave class strings in hero/header CTA buttons.
   - Acceptance: Same visuals; CTA style managed in one component.
