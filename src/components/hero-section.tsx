@@ -1,21 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CircleCheckBig } from "lucide-react";
-
-const heroServiceHighlights = [
-  "Commercial Plumbing Maintenance & Repairs",
-  "Legionella Risk Assessments & Monitoring",
-  "Remedial Works, Sampling & Compliance Support",
-];
+import { accreditationLogos, heroServiceHighlights } from "@/lib/site-content";
 
 const companyStartYear = 2007;
 const yearsServing = new Date().getFullYear() - companyStartYear;
-
-const accreditationLogos = [
-  { src: "/CHAS.webp", alt: "CHAS accreditation", width: 180, height: 64 },
-  { src: "/WIAPS.svg", alt: "WIAPS accreditation", width: 180, height: 64 },
-  { src: "/SafeContractor.png", alt: "SafeContractor accreditation", width: 180, height: 64 },
-];
 
 const heroCtaClass =
   "relative inline-flex overflow-hidden rounded-md bg-[#36467F] px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-[38%] after:bg-[#4A6EA7] after:transition-[height,clip-path] after:duration-300 after:ease-out after:[clip-path:polygon(0_45%,12%_70%,24%_52%,37%_74%,52%_50%,66%_72%,79%_54%,91%_73%,100%_58%,100%_100%,0_100%)] hover:after:h-full hover:after:[clip-path:polygon(0_0,100%_0,100%_100%,0_100%)]";
@@ -33,7 +22,7 @@ export function HeroSection() {
         }}
       >
         <div className="mx-auto grid w-full max-w-6xl gap-4 px-5 py-4">
-          <div className="space-y-3">
+          <div className="flex-center space-y-3">
             <h1 className="max-w-3xl text-lg leading-tight font-bold tracking-tight text-[#36467F]">
               Clean Water. Safe Systems. Full Compliance.
             </h1>
@@ -48,7 +37,7 @@ export function HeroSection() {
               <span className="relative z-10">Get in Touch</span>
             </Link>
           </div>
-          <div className="rounded-2xl border border-gray-300/30 bg-gray-100/30 p-6 backdrop-blur-sm">
+          <div className="z-10 rounded-2xl border border-gray-300/30 bg-gray-100/30 p-6 backdrop-blur-sm">
             <h2 className="text-lg font-bold tracking-tight text-[#36467F]">Our Services</h2>
             <div className="mt-2.5 space-y-2.5">
               {heroServiceHighlights.map((service) => (

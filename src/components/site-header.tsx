@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
+import { complianceLinks, primaryLinks, serviceLinks } from "@/lib/site-content";
 
 import {
   NavigationMenu,
@@ -13,48 +14,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-
-const primaryLinks = [
-  { href: "/#about", label: "About" },
-  { href: "/#coverage", label: "Coverage" },
-  { href: "/#contact", label: "Contact" },
-];
-
-const serviceLinks = [
-  {
-    href: "/#services",
-    title: "Emergency Plumbing",
-    description: "24/7 response for leaks, bursts, and no-water incidents.",
-  },
-  {
-    href: "/#services",
-    title: "Planned Maintenance",
-    description: "Routine checks for commercial and multi-site properties.",
-  },
-  {
-    href: "/#services",
-    title: "Installations & Upgrades",
-    description: "Pipework, valves, boosters, and system modernisation.",
-  },
-];
-
-const complianceLinks = [
-  {
-    href: "/#hygiene",
-    title: "Legionella Risk Control",
-    description: "Monitoring, sampling, and control-scheme execution.",
-  },
-  {
-    href: "/#hygiene",
-    title: "Water Hygiene Remediation",
-    description: "Tank cleaning, disinfection, and corrective works.",
-  },
-  {
-    href: "/#hygiene",
-    title: "Compliance Documentation",
-    description: "Audit-ready records and clear reporting for stakeholders.",
-  },
-];
 
 export function SiteHeader() {
   const waveRef = useRef<HTMLDivElement>(null);
@@ -131,7 +90,7 @@ export function SiteHeader() {
         {showNavBackground && (
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-white/60 backdrop-blur-2xl backdrop-saturate-150"
+            className={`${isMobileMenuOpen ? "opacity-0" : "opacity-100"} pointer-events-none absolute inset-0 bg-white/60 backdrop-blur-2xl backdrop-saturate-150`}
           />
         )}
         <div
@@ -157,6 +116,7 @@ export function SiteHeader() {
             />
           </Link>
 
+          {/* Desktop navigation (visible on lg+) */}
           <NavigationMenu className="hidden lg:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
@@ -236,6 +196,7 @@ export function SiteHeader() {
             </Link>
           </div>
 
+          {/* Mobile menu trigger (visible below lg) */}
           <button
             type="button"
             aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -266,6 +227,7 @@ export function SiteHeader() {
         </div>
       </header>
 
+      {/* Mobile slide-out drawer navigation */}
       <div
         className={`fixed inset-0 z-40 lg:hidden ${
           isMobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
@@ -275,7 +237,7 @@ export function SiteHeader() {
           type="button"
           aria-label="Close mobile menu"
           onClick={() => setIsMobileMenuOpen(false)}
-          className={`absolute inset-0 bg-black/25 transition-opacity duration-300 ${
+          className={`absolute inset-0 transition-opacity duration-300 ${
             isMobileMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
           }`}
         />
@@ -283,7 +245,7 @@ export function SiteHeader() {
           id="mobile-nav-drawer"
           role="dialog"
           aria-modal="true"
-          className={`absolute top-0 right-0 h-dvh w-[85vw] max-w-sm overflow-y-auto bg-white px-6 pt-24 pb-8 shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none ${
+          className={`absolute top-0 right-0 h-dvh w-[85vw] max-w-sm overflow-y-auto bg-white/30 px-6 pt-24 pb-8 shadow-2xl backdrop-blur-xl transition-transform duration-300 ease-out motion-reduce:transition-none ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >

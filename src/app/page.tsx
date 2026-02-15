@@ -1,40 +1,5 @@
 import { HeroSection } from "@/components/hero-section";
-
-const serviceLinks = [
-  {
-    href: "#services",
-    title: "Emergency Plumbing",
-    description: "24/7 response for leaks, bursts, and no-water incidents.",
-  },
-  {
-    href: "#services",
-    title: "Planned Maintenance",
-    description: "Routine checks for commercial and multi-site properties.",
-  },
-  {
-    href: "#services",
-    title: "Installations & Upgrades",
-    description: "Pipework, valves, boosters, and system modernisation.",
-  },
-];
-
-const complianceLinks = [
-  {
-    href: "#hygiene",
-    title: "Legionella Risk Control",
-    description: "Monitoring, sampling, and control-scheme execution.",
-  },
-  {
-    href: "#hygiene",
-    title: "Water Hygiene Remediation",
-    description: "Tank cleaning, disinfection, and corrective works.",
-  },
-  {
-    href: "#hygiene",
-    title: "Compliance Documentation",
-    description: "Audit-ready records and clear reporting for stakeholders.",
-  },
-];
+import { complianceLinks, serviceLinks } from "@/lib/site-content";
 
 export default function Home() {
   return (
