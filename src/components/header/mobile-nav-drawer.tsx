@@ -15,7 +15,7 @@ export function MobileNavDrawer({ isOpen, onClose }: MobileNavDrawerProps) {
     <>
       {/* Mobile slide-out drawer navigation */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden ${isOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+        className={`fixed inset-0 z-40 lg:hidden ${isOpen ? "pointer-events-auto bg-black/15" : "pointer-events-none"}`}
       >
         <button
           type="button"
@@ -29,7 +29,7 @@ export function MobileNavDrawer({ isOpen, onClose }: MobileNavDrawerProps) {
           id="mobile-nav-drawer"
           role="dialog"
           aria-modal="true"
-          className={`absolute top-0 right-0 h-dvh w-[85vw] max-w-sm overflow-y-auto rounded-l-4xl bg-white/30 px-6 pt-24 pb-8 shadow-2xl backdrop-blur-xl transition-transform duration-300 ease-out motion-reduce:transition-none ${
+          className={`absolute top-0 right-0 h-dvh w-[85vw] max-w-sm overflow-y-auto bg-white px-6 pt-24 pb-8 shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >

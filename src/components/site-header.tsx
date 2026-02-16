@@ -62,13 +62,25 @@ export function SiteHeader() {
 
   return (
     <>
-      <div ref={waveRef} aria-hidden="true" className="w-full overflow-hidden leading-none">
+      <div
+        ref={waveRef}
+        aria-hidden="true"
+        className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden leading-none"
+      >
+        <Image
+          src="/tws-wave-top-mobile.svg"
+          alt=""
+          width={1200}
+          height={170}
+          className="relative left-1/2 block h-auto w-[112vw] max-w-none -translate-x-1/2 md:hidden"
+          priority
+        />
         <Image
           src="/tws-wave-top.svg"
           alt=""
           width={4245}
           height={75}
-          className="mx-auto block h-auto w-full max-w-480"
+          className="mx-auto hidden h-auto w-full max-w-480 md:block"
           priority
         />
       </div>
@@ -77,7 +89,7 @@ export function SiteHeader() {
         {showNavBackground && (
           <div
             aria-hidden="true"
-            className={`${isMobileMenuOpen ? "opacity-0" : "opacity-100"} pointer-events-none absolute inset-0 bg-white/60 backdrop-blur-2xl backdrop-saturate-150`}
+            className={`${isMobileMenuOpen ? "opacity-0" : "opacity-100"} pointer-events-none absolute inset-0 bg-white`}
           />
         )}
         <div

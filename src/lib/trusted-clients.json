@@ -1,0 +1,26 @@
+[
+  {
+    "name": "London Piers",
+    "type": "Public Infrastructure"
+  },
+  {
+    "name": "Leeds Rhinos",
+    "type": "Sport & Events"
+  },
+  {
+    "name": "Multi-site Facilities Portfolios",
+    "type": "Facilities Management"
+  },
+  {
+    "name": "Education Estates",
+    "type": "Schools & Campuses"
+  },
+  {
+    "name": "Commercial Warehousing",
+    "type": "Logistics & Industrial"
+  },
+  {
+    "name": "Public & Private Sector Buildings",
+    "type": "Compliance Programmes"
+  }
+]

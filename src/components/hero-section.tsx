@@ -8,7 +8,7 @@ const yearsServing = new Date().getFullYear() - companyStartYear;
 
 export function HeroSection() {
   return (
-    <section className="relative mb-[clamp(7rem,10vw,12rem)] w-full">
+    <section className="relative mb-20 w-full md:mb-[clamp(7rem,10vw,12rem)]">
       {/* Mobile hero layout */}
       <div
         className="relative overflow-visible lg:hidden"
@@ -18,13 +18,15 @@ export function HeroSection() {
           backgroundRepeat: "repeat-y",
         }}
       >
-        <div className="mx-auto grid w-full max-w-6xl gap-4 px-5 py-4">
-          <div className="flex-center space-y-3">
-            <h1 className="text-brand max-w-3xl text-lg leading-tight font-bold tracking-tight">
+        <div className="mx-auto grid w-full max-w-6xl gap-3 px-4 py-3">
+          <div className="flex-center space-y-2.5">
+            <h1 className="text-brand max-w-3xl text-[1.95rem] leading-[1.1] font-bold tracking-tight">
               Clean Water. Safe Systems. Full Compliance.
             </h1>
-            <p className="text-md text-brand font-semibold">Professional Water Hygiene Services</p>
-            <p className="text-muted-foreground max-w-3xl text-sm leading-7">
+            <p className="text-brand text-base font-semibold">
+              Professional Water Hygiene Services
+            </p>
+            <p className="text-muted-foreground max-w-3xl text-sm leading-6">
               Professional legionella risk assessments, monitoring, and remedial works for
               commercial and residential properties across the UK.
             </p>
@@ -32,32 +34,32 @@ export function HeroSection() {
               Get in Touch
             </WaveButton>
           </div>
-          <div className="z-10 rounded-2xl border border-gray-300/30 bg-gray-100/30 p-6 backdrop-blur-sm">
-            <h2 className="text-brand text-lg font-bold tracking-tight">Our Services</h2>
-            <div className="mt-2.5 space-y-2.5">
+          <div className="z-10 rounded-2xl border border-gray-300/30 bg-gray-100/30 p-4 backdrop-blur-sm">
+            <h2 className="text-brand text-base font-bold tracking-tight">Our Services</h2>
+            <div className="mt-2 space-y-2">
               {heroServiceHighlights.map((service) => (
                 <div key={service}>
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-2">
                     <CircleCheckBig className="text-brand-success size-4 shrink-0" />
-                    <p className="text-brand text-sm font-medium">{service}</p>
+                    <p className="text-brand text-xs font-medium">{service}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="bg-brand/15 my-3.5 h-px" />
+            <div className="bg-brand/15 my-3 h-px" />
             <p className="text-brand text-xs">
               Fully compliant with HSE ACOP L8 and HSG274 guidance. Supporting businesses across
               Yorkshire and full UK-wide coverage for over {yearsServing} years.
             </p>
-            <div className="mt-4 grid grid-cols-3 gap-1.5">
+            <div className="mt-3 grid grid-cols-3 gap-1">
               {accreditationLogos.map((logo) => (
-                <div key={logo.src} className="flex h-12 items-center justify-center p-1">
+                <div key={logo.src} className="flex h-10 items-center justify-center p-1">
                   <Image
                     src={logo.src}
                     alt={logo.alt}
                     width={logo.width}
                     height={logo.height}
-                    className="max-h-8 w-auto object-contain"
+                    className="max-h-7 w-auto object-contain"
                   />
                 </div>
               ))}
