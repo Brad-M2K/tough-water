@@ -25,6 +25,7 @@ export function SectorsShowcase() {
   const [isPaused, setIsPaused] = useState(false);
   const [hasRevealed, setHasRevealed] = useState(false);
   const sectionRef = useRef<HTMLElement | null>(null);
+  const pillsContainerRef = useRef<HTMLDivElement | null>(null);
   const mobilePillRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const resumeTimerRef = useRef<number | null>(null);
 
@@ -54,10 +55,19 @@ export function SectorsShowcase() {
       return;
     }
 
-    mobilePillRefs.current[activeIndex]?.scrollIntoView({
+    const container = pillsContainerRef.current;
+    const activePill = mobilePillRefs.current[activeIndex];
+    if (!container || !activePill) {
+      return;
+    }
+
+    const nextLeft = activePill.offsetLeft - (container.clientWidth - activePill.clientWidth) / 2;
+    const maxScrollLeft = container.scrollWidth - container.clientWidth;
+    const clampedLeft = Math.max(0, Math.min(nextLeft, maxScrollLeft));
+
+    container.scrollTo({
+      left: clampedLeft,
       behavior: "smooth",
-      inline: "center",
-      block: "nearest",
     });
   }, [activeIndex]);
 
@@ -94,11 +104,18 @@ export function SectorsShowcase() {
     <section ref={sectionRef} id="sectors" className="relative overflow-hidden py-10 md:py-16">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
         <Image
+          src="/line-mobile.svg"
+          alt=""
+          width={1200}
+          height={900}
+          className="absolute top-1/2 left-1/2 w-[170vw] min-w-[760px] -translate-x-1/2 -translate-y-1/2 opacity-80 md:hidden"
+        />
+        <Image
           src="/line.svg"
           alt=""
           width={2200}
           height={320}
-          className="absolute top-1/2 left-1/2 min-w-225 -translate-x-1/2 -translate-y-1/2 opacity-80 md:w-[125vw]"
+          className="absolute top-1/2 left-1/2 hidden min-w-225 -translate-x-1/2 -translate-y-1/2 opacity-80 md:block md:w-[125vw]"
         />
       </div>
       <div className="relative z-10 mx-auto w-full max-w-6xl px-5 md:px-6">
@@ -123,6 +140,7 @@ export function SectorsShowcase() {
           </div>
 
           <div
+            ref={pillsContainerRef}
             className={`mt-6 flex gap-2 overflow-x-auto pb-1 transition-all duration-600 md:mt-8 md:flex-wrap md:overflow-visible ${
               hasRevealed ? "translate-y-0 opacity-100 delay-100" : "translate-y-2 opacity-0"
             }`}
@@ -146,7 +164,7 @@ export function SectorsShowcase() {
                   onBlur={() => setIsPaused(false)}
                   onMouseEnter={() => setIsPaused(true)}
                   onMouseLeave={() => setIsPaused(false)}
-                  className={`rounded-full border px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-colors duration-300 md:px-4 md:py-2 md:text-sm ${
+                  className={`cursor-pointer rounded-full border px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-colors duration-300 md:px-4 md:py-2 md:text-sm ${
                     isActive
                       ? "border-brand bg-brand text-brand-foreground"
                       : "border-brand/20 text-brand hover:bg-brand/8 bg-white"
