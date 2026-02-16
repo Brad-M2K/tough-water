@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
+import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,8 +30,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} overflow-x-hidden antialiased`}>
-        <SiteHeader />
-        {children}
+        <SmoothScrollProvider>
+          <SiteHeader />
+          {children}
+        </SmoothScrollProvider>
       </body>
     </html>
   );
