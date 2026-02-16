@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/hero-section";
 import { SectorsShowcase } from "@/components/sectors-showcase";
+import { TrustedBySection } from "@/components/trusted-by-section";
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
       <HeroSection />
       <main>
         <SectorsShowcase />
+        <TrustedBySection />
       </main>
     </div>
   );
