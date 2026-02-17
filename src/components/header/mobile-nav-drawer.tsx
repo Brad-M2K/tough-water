@@ -35,7 +35,7 @@ export function MobileNavDrawer({ isOpen, onClose }: MobileNavDrawerProps) {
         >
           <div
             aria-hidden="true"
-            className="from-brand/18 pointer-events-none absolute inset-y-0 left-0 w-4 bg-linear-to-r to-transparent"
+            className="from-brand/18 pointer-events-none absolute inset-y-0 left-0 w-3 bg-linear-to-r to-transparent"
           />
           <nav className="mx-auto flex w-full flex-col gap-8">
             <Link href="/" className="flex justify-start" onClick={onClose}>
@@ -44,7 +44,7 @@ export function MobileNavDrawer({ isOpen, onClose }: MobileNavDrawerProps) {
                 alt="Tough Water"
                 width={240}
                 height={52}
-                className="h-9 w-auto"
+                className="h-12 w-auto"
               />
             </Link>
 

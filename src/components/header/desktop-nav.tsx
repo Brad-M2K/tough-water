@@ -97,7 +97,7 @@ export function DesktopNav() {
         >
           <FaLinkedinIn className="size-4" />
         </Link>
-        <WaveButton href="/#contact" className="px-4 py-1 text-lg">
+        <WaveButton href="/#contact" className="max-h-8 max-w-30 px-4 py-1 text-base">
           Get in Touch
         </WaveButton>
       </div>

@@ -112,7 +112,7 @@ export function SiteHeader() {
                 width={300}
                 height={64}
                 className={`w-auto transition-all duration-300 ${
-                  showNavBackground ? "h-8 md:h-13" : "h-10 md:h-20"
+                  showNavBackground ? "h-10 md:h-13" : "h-18 md:h-20"
                 }`}
                 priority
               />
