@@ -5,7 +5,7 @@ import { TrustedBySection } from "@/components/trusted-by-section";
 
 export default function Home() {
   return (
-    <div className="from-background via-background to-muted/30 min-h-screen bg-linear-to-b">
+    <div className="site-shift-layer from-background via-background to-muted/30 min-h-screen bg-linear-to-b">
       <HeroSection />
       <main>
         <SectorsShowcase />
