@@ -13,21 +13,21 @@ export function SiteFooter() {
     <footer className="bg-brand text-brand-foreground relative mt-10 md:mt-14">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 -top-8 overflow-hidden leading-none md:-top-10"
+        className="pointer-events-none absolute inset-x-0 -top-5.5 overflow-hidden leading-none md:-top-5.5"
       >
         <Image
-          src="/tws-wave-top-mobile.svg"
+          src="/tws-wave-bottom-mobile.svg"
           alt=""
           width={1200}
           height={170}
-          className="relative left-1/2 block h-auto w-[112vw] max-w-none -translate-x-1/2 rotate-180 md:hidden"
+          className="relative left-1/2 block h-auto w-[112vw] max-w-none -translate-x-1/2 md:hidden"
         />
         <Image
-          src="/tws-wave-top.svg"
+          src="/tws-wave-bottom.svg"
           alt=""
           width={4245}
           height={75}
-          className="mx-auto hidden h-auto w-full max-w-480 rotate-180 md:block"
+          className="mx-auto hidden h-auto w-full max-w-480 md:block"
         />
       </div>
 

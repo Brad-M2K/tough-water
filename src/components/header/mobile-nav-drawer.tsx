@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
@@ -11,11 +12,21 @@ type MobileNavDrawerProps = {
 };
 
 export function MobileNavDrawer({ isOpen, onClose }: MobileNavDrawerProps) {
+  const drawerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!isOpen || !drawerRef.current) {
+      return;
+    }
+
+    drawerRef.current.scrollTo({ top: 0, behavior: "auto" });
+  }, [isOpen]);
+
   return (
     <>
       {/* Mobile slide-out drawer navigation */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden ${isOpen ? "pointer-events-auto bg-black/15" : "pointer-events-none"}`}
+        className={`fixed inset-0 z-40 lg:hidden ${isOpen ? "pointer-events-auto" : "pointer-events-none"}`}
       >
         <button
           type="button"
@@ -29,10 +40,15 @@ export function MobileNavDrawer({ isOpen, onClose }: MobileNavDrawerProps) {
           id="mobile-nav-drawer"
           role="dialog"
           aria-modal="true"
-          className={`absolute top-0 right-0 h-dvh w-[85vw] max-w-sm overflow-y-auto bg-white px-6 pt-24 pb-8 shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none ${
+          ref={drawerRef}
+          className={`absolute top-0 right-0 h-svh w-[85vw] max-w-sm overflow-y-auto bg-white px-6 pt-16 pb-[calc(env(safe-area-inset-bottom)+1.25rem)] shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
+          <div
+            aria-hidden="true"
+            className="from-brand/10 pointer-events-none absolute inset-y-0 left-0 w-3 bg-linear-to-r to-transparent"
+          />
           <nav className="mx-auto flex w-full flex-col gap-8">
             <Link href="/" className="flex justify-start" onClick={onClose}>
               <Image
@@ -40,7 +56,7 @@ export function MobileNavDrawer({ isOpen, onClose }: MobileNavDrawerProps) {
                 alt="Tough Water"
                 width={240}
                 height={52}
-                className="h-9 w-auto"
+                className="h-10 w-auto"
               />
             </Link>
 

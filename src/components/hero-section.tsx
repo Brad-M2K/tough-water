@@ -20,7 +20,7 @@ export function HeroSection() {
       >
         <div className="mx-auto grid w-full max-w-6xl gap-3 px-4 py-3">
           <div className="flex-center space-y-2.5">
-            <h1 className="text-brand max-w-3xl text-[1.95rem] leading-[1.1] font-bold tracking-tight">
+            <h1 className="text-brand mt-15 max-w-3xl text-xl leading-[1.1] font-bold tracking-tight">
               Clean Water. Safe Systems. Full Compliance.
             </h1>
             <p className="text-brand text-base font-semibold">

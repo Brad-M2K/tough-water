@@ -30,6 +30,8 @@ type RotatingShowcaseProps = {
 const TRANSITION_MS = 520;
 const AUTOPLAY_MS = 5500;
 const MOBILE_RESUME_MS = 7000;
+const TEXT_OUT_MS = 170;
+const TEXT_HOLD_MS = 120;
 
 export function RotatingShowcase({
   id,
@@ -44,13 +46,22 @@ export function RotatingShowcase({
   const [isPaused, setIsPaused] = useState(false);
   const [direction, setDirection] = useState<1 | -1>(1);
   const [previousIndex, setPreviousIndex] = useState<number | null>(null);
+  const [slideReady, setSlideReady] = useState(false);
+  const [contentIndex, setContentIndex] = useState(0);
+  const [textPhase, setTextPhase] = useState<"idle" | "out" | "in">("idle");
+
   const pillsContainerRef = useRef<HTMLDivElement | null>(null);
   const mobilePillRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const resumeTimerRef = useRef<number | null>(null);
   const transitionTimerRef = useRef<number | null>(null);
+  const textOutTimerRef = useRef<number | null>(null);
+  const textSwapTimerRef = useRef<number | null>(null);
+  const textInTimerRef = useRef<number | null>(null);
+  const rafRef = useRef<number | null>(null);
 
   const itemCount = items.length;
   const activeItem = items[activeIndex];
+  const contentItem = items[contentIndex];
 
   const clearTransitionTimer = useCallback(() => {
     if (transitionTimerRef.current) {
@@ -59,10 +70,33 @@ export function RotatingShowcase({
     }
   }, []);
 
+  const clearRaf = useCallback(() => {
+    if (rafRef.current) {
+      window.cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+  }, []);
+
+  const clearTextTimers = useCallback(() => {
+    if (textOutTimerRef.current) {
+      window.clearTimeout(textOutTimerRef.current);
+      textOutTimerRef.current = null;
+    }
+    if (textSwapTimerRef.current) {
+      window.clearTimeout(textSwapTimerRef.current);
+      textSwapTimerRef.current = null;
+    }
+    if (textInTimerRef.current) {
+      window.clearTimeout(textInTimerRef.current);
+      textInTimerRef.current = null;
+    }
+  }, []);
+
   const queueTransitionEnd = useCallback(() => {
     clearTransitionTimer();
     transitionTimerRef.current = window.setTimeout(() => {
       setPreviousIndex(null);
+      setSlideReady(false);
     }, TRANSITION_MS);
   }, [clearTransitionTimer]);
 
@@ -75,23 +109,51 @@ export function RotatingShowcase({
     }, MOBILE_RESUME_MS);
   };
 
+  const startSlide = useCallback(
+    (nextIndex: number, nextDirection: 1 | -1, currentIndex: number) => {
+      if (nextIndex === currentIndex) {
+        return;
+      }
+
+      setDirection(nextDirection);
+      setPreviousIndex(currentIndex);
+      setSlideReady(false);
+      setActiveIndex(nextIndex);
+
+      clearRaf();
+      rafRef.current = window.requestAnimationFrame(() => {
+        setSlideReady(true);
+      });
+
+      queueTransitionEnd();
+    },
+    [clearRaf, queueTransitionEnd]
+  );
+
   useEffect(() => {
     if (itemCount <= 1 || isPaused) {
       return;
     }
 
     const intervalId = window.setInterval(() => {
-      setDirection(1);
       setActiveIndex((current) => {
         const next = (current + 1) % itemCount;
+        setDirection(1);
         setPreviousIndex(current);
+        setSlideReady(false);
+
+        clearRaf();
+        rafRef.current = window.requestAnimationFrame(() => {
+          setSlideReady(true);
+        });
+
         queueTransitionEnd();
         return next;
       });
     }, AUTOPLAY_MS);
 
     return () => window.clearInterval(intervalId);
-  }, [isPaused, itemCount, queueTransitionEnd]);
+  }, [clearRaf, isPaused, itemCount, queueTransitionEnd]);
 
   useEffect(() => {
     if (window.innerWidth >= 768 || itemCount <= 1) {
@@ -112,17 +174,44 @@ export function RotatingShowcase({
   }, [activeIndex, itemCount]);
 
   useEffect(() => {
+    if (contentIndex === activeIndex) {
+      return;
+    }
+
+    clearTextTimers();
+
+    textOutTimerRef.current = window.setTimeout(() => {
+      setTextPhase("out");
+    }, 0);
+
+    textSwapTimerRef.current = window.setTimeout(() => {
+      setContentIndex(activeIndex);
+      setTextPhase("in");
+
+      textInTimerRef.current = window.setTimeout(() => {
+        setTextPhase("idle");
+      }, TEXT_HOLD_MS);
+    }, TEXT_OUT_MS);
+  }, [activeIndex, contentIndex, clearTextTimers]);
+
+  useEffect(() => {
     return () => {
       if (resumeTimerRef.current) {
         window.clearTimeout(resumeTimerRef.current);
       }
       clearTransitionTimer();
+      clearRaf();
+      clearTextTimers();
     };
-  }, [clearTransitionTimer]);
+  }, [clearRaf, clearTextTimers, clearTransitionTimer]);
 
   if (itemCount === 0) {
     return null;
   }
+
+  const textFadeClass = `transition-opacity duration-200 ease-out ${
+    textPhase === "idle" ? "opacity-100" : "opacity-0"
+  }`;
 
   return (
     <section id={id} className="bg-stone-50 py-10 md:py-14">
@@ -152,14 +241,7 @@ export function RotatingShowcase({
                   mobilePillRefs.current[index] = el;
                 }}
                 onClick={() => {
-                  if (index === activeIndex) {
-                    return;
-                  }
-
-                  setDirection(index > activeIndex ? 1 : -1);
-                  setPreviousIndex(activeIndex);
-                  setActiveIndex(index);
-                  queueTransitionEnd();
+                  startSlide(index, index > activeIndex ? 1 : -1, activeIndex);
                   setIsPaused(true);
                   queueMobileResume();
                 }}
@@ -180,11 +262,15 @@ export function RotatingShowcase({
         </div>
 
         <div className="mt-5 grid gap-4 md:mt-7 md:grid-cols-[1.05fr_1fr] md:gap-7">
-          <figure className="relative h-52 overflow-hidden rounded-2xl md:h-84">
+          <figure className="relative isolate h-52 overflow-hidden rounded-2xl md:h-84">
             {previousIndex !== null && (
               <div
-                className={`animate-out absolute inset-0 z-10 duration-500 ${
-                  direction === 1 ? "slide-out-to-left-10" : "slide-out-to-right-10"
+                className={`absolute inset-0 z-20 [transform:translateZ(0)] transition-transform duration-700 ease-out will-change-transform [backface-visibility:hidden] ${
+                  slideReady
+                    ? direction === 1
+                      ? "-translate-x-full"
+                      : "translate-x-full"
+                    : "translate-x-0"
                 }`}
               >
                 <Image
@@ -196,12 +282,16 @@ export function RotatingShowcase({
                 />
               </div>
             )}
+
             <div
-              key={`active-image-${activeItem.id}-${direction}-${previousIndex !== null ? "move" : "still"}`}
-              className={`absolute inset-0 z-20 ${
-                previousIndex !== null
-                  ? `animate-in duration-500 ${direction === 1 ? "slide-in-from-right-10" : "slide-in-from-left-10"}`
-                  : ""
+              className={`absolute inset-0 z-10 [transform:translateZ(0)] transition-transform duration-700 ease-out will-change-transform [backface-visibility:hidden] ${
+                previousIndex === null
+                  ? "translate-x-0"
+                  : slideReady
+                    ? "translate-x-0"
+                    : direction === 1
+                      ? "translate-x-full"
+                      : "-translate-x-full"
               }`}
             >
               <Image
@@ -212,6 +302,7 @@ export function RotatingShowcase({
                 className="h-full w-full object-cover"
               />
             </div>
+
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-black/55 to-transparent" />
             <figcaption className="absolute right-3 bottom-2 text-[10px] text-white/85 md:text-[11px]">
               Photo:{" "}
@@ -227,45 +318,43 @@ export function RotatingShowcase({
           </figure>
 
           <div className="space-y-3 md:space-y-4">
-            <article
-              key={`summary-${activeItem.id}-${direction}`}
-              className={`bg-white p-4 md:p-5 ${
-                previousIndex !== null
-                  ? `animate-in duration-400 ${direction === 1 ? "slide-in-from-right-4" : "slide-in-from-left-4"}`
-                  : ""
-              }`}
-            >
-              <h3 className="text-brand text-lg leading-tight font-semibold md:text-2xl">
-                {activeItem.title}
-              </h3>
-              <p className="text-muted-foreground mt-2 text-sm leading-6 md:mt-2.5 md:text-base md:leading-relaxed">
-                {activeItem.summary}
-              </p>
-            </article>
+            <div className="overflow-hidden bg-white">
+              <article className="p-4 md:p-5">
+                <h3
+                  className={`text-brand text-lg leading-tight font-semibold md:text-2xl ${textFadeClass}`}
+                >
+                  {contentItem.title}
+                </h3>
+                <p
+                  className={`text-muted-foreground mt-2 text-sm leading-6 md:mt-2.5 md:text-base md:leading-relaxed ${textFadeClass}`}
+                >
+                  {contentItem.summary}
+                </p>
+              </article>
+            </div>
 
-            <aside
-              key={`support-${activeItem.id}-${direction}`}
-              className={`border-brand-accent/55 bg-brand-accent/12 border-l-4 p-4 md:p-5 ${
-                previousIndex !== null
-                  ? `animate-in duration-500 ${direction === 1 ? "slide-in-from-right-4" : "slide-in-from-left-4"}`
-                  : ""
-              }`}
-            >
-              <p className="text-brand/75 text-xs font-semibold tracking-[0.08em] uppercase md:text-sm">
-                {supportHeading}
-              </p>
-              <ul className="mt-2 space-y-2 md:mt-3 md:space-y-2.5">
-                {activeItem.highlights.slice(0, highlightCount).map((highlight) => (
-                  <li
-                    key={highlight}
-                    className="text-brand flex items-start gap-2.5 text-sm md:text-base"
-                  >
-                    <span className="bg-brand mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full" />
-                    <span>{highlight}</span>
-                  </li>
-                ))}
-              </ul>
-            </aside>
+            <div className="border-brand-accent/55 bg-brand-accent/12 overflow-hidden border-l-4">
+              <aside className="p-4 md:p-5">
+                <p
+                  className={`text-brand/75 text-xs font-semibold tracking-[0.08em] uppercase md:text-sm ${textFadeClass}`}
+                >
+                  {supportHeading}
+                </p>
+                <ul className="mt-2 space-y-2 md:mt-3 md:space-y-2.5">
+                  {contentItem.highlights.slice(0, highlightCount).map((highlight) => (
+                    <li
+                      key={highlight}
+                      className={`text-brand flex items-start gap-2.5 text-sm transition-opacity duration-200 ease-out md:text-base ${
+                        textPhase === "idle" ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <span className="bg-brand mt-1.5 inline-block h-2 w-2 shrink-0 rounded-full" />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+            </div>
           </div>
         </div>
       </div>

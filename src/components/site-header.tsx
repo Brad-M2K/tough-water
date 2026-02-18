@@ -29,8 +29,10 @@ export function SiteHeader() {
 
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+    document.body.classList.toggle("mobile-nav-open", isMobileMenuOpen);
     return () => {
       document.body.style.overflow = "";
+      document.body.classList.remove("mobile-nav-open");
     };
   }, [isMobileMenuOpen]);
 
@@ -65,7 +67,7 @@ export function SiteHeader() {
       <div
         ref={waveRef}
         aria-hidden="true"
-        className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden leading-none"
+        className="site-shift-layer relative left-1/2 w-screen -translate-x-1/2 overflow-hidden leading-none"
       >
         <Image
           src="/tws-wave-top-mobile.svg"
@@ -97,25 +99,27 @@ export function SiteHeader() {
             showNavBackground ? "py-2" : "py-4"
           }`}
         >
-          <Link
-            href="/"
-            className={`shrink-0 transition-opacity duration-200 lg:opacity-100 ${
-              isMobileMenuOpen ? "pointer-events-none opacity-0" : "opacity-100"
-            }`}
-          >
-            <Image
-              src="/tws-logo-wordmark.png"
-              alt="Tough Water"
-              width={300}
-              height={64}
-              className={`w-auto transition-all duration-300 ${
-                showNavBackground ? "h-8 md:h-13" : "h-10 md:h-20"
+          <div className="site-shift-layer flex w-full items-center justify-between">
+            <Link
+              href="/"
+              className={`shrink-0 transition-opacity duration-200 lg:opacity-100 ${
+                isMobileMenuOpen ? "pointer-events-none opacity-0" : "opacity-100"
               }`}
-              priority
-            />
-          </Link>
+            >
+              <Image
+                src="/tws-logo-wordmark.png"
+                alt="Tough Water"
+                width={300}
+                height={64}
+                className={`w-auto transition-all duration-700 ${
+                  showNavBackground ? "h-10 md:h-13" : "h-18 md:h-20"
+                }`}
+                priority
+              />
+            </Link>
 
-          <DesktopNav />
+            <DesktopNav />
+          </div>
 
           {/* Mobile menu trigger (visible below lg) */}
           <button
@@ -124,7 +128,7 @@ export function SiteHeader() {
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-nav-drawer"
             onClick={() => setIsMobileMenuOpen((open) => !open)}
-            className="relative z-50 inline-flex h-10 w-10 items-center justify-center lg:hidden"
+            className="mobile-menu-trigger absolute top-1/2 right-6 z-50 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center lg:hidden"
           >
             <span
               aria-hidden="true"

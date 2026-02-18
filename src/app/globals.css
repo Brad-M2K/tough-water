@@ -136,3 +136,20 @@
     @apply bg-background text-foreground;
   }
 }
+
+@media (max-width: 1023px) {
+  .site-shift-layer {
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  body.mobile-nav-open .site-shift-layer {
+    transform: translateX(calc(-1 * min(85vw, 24rem)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-shift-layer {
+    transition: none;
+  }
+}
