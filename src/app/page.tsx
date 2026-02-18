@@ -1,3 +1,4 @@
+import { ContactSection } from "@/components/contact-section";
 import { HeroSection } from "@/components/hero-section";
 import { ServicesSnapshotSection } from "@/components/services-snapshot-section";
 import { SectorsShowcase } from "@/components/sectors-showcase";
@@ -10,8 +11,9 @@ export default function Home() {
       <HeroSection />
       <main>
         <ServicesSnapshotSection />
-        <SectorsShowcase />
         <TrustedBySection />
+        <SectorsShowcase />
+        <ContactSection />
       </main>
       <SiteFooter />
     </div>
