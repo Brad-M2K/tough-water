@@ -47,7 +47,7 @@ export function MobileNavDrawer({ isOpen, onClose }: MobileNavDrawerProps) {
         >
           <div
             aria-hidden="true"
-            className="from-brand/18 pointer-events-none absolute inset-y-0 left-0 w-3 bg-linear-to-r to-transparent"
+            className="from-brand/10 pointer-events-none absolute inset-y-0 left-0 w-3 bg-linear-to-r to-transparent"
           />
           <nav className="mx-auto flex w-full flex-col gap-8">
             <Link href="/" className="flex justify-start" onClick={onClose}>

@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
+import { WaveButton } from "@/components/ui/wave-button";
 
 type SnapshotCard = {
   title: string;
@@ -120,12 +120,9 @@ export function ServicesSnapshotSection() {
         </div>
 
         <div className="mt-6 md:mt-8">
-          <Link
-            href="/#contact"
-            className="bg-brand text-brand-foreground inline-flex rounded-md px-5 py-2.5 text-sm font-semibold transition-opacity hover:opacity-90"
-          >
+          <WaveButton href="/#contact" className="px-5 py-2.5 text-sm">
             More in Services
-          </Link>
+          </WaveButton>
         </div>
       </div>
     </section>

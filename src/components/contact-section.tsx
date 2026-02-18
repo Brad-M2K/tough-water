@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
 import Image from "next/image";
+import { waveButtonBaseClass } from "@/components/ui/wave-button";
+import { cn } from "@/lib/utils";
 
 const serviceOptions = [
   "Emergency Plumbing",
@@ -154,9 +156,12 @@ export function ContactSection() {
 
             <button
               type="submit"
-              className="bg-brand text-brand-foreground mt-4 inline-flex h-10 items-center justify-center rounded-md px-5 text-sm font-semibold transition-opacity hover:opacity-90"
+              className={cn(
+                waveButtonBaseClass,
+                "mt-4 h-10 items-center justify-center px-5 text-sm"
+              )}
             >
-              Send Enquiry
+              <span className="relative z-10">Send Enquiry</span>
             </button>
           </form>
         </div>
